@@ -16,6 +16,7 @@
     "@types/react": "^17.0.21",
     "babel-loader": "^8.2.2",
     "postcss": "^8.3.6",
+    "prettier": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.56.3",
@@ -30,6 +31,8 @@
   },
   "dependencies": {},
   "scripts": {
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
     "build": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
