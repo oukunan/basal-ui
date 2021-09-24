@@ -15,7 +15,7 @@ type AccordionProviderProps = {
 } & Omit<AccordionProps, 'children'>
 
 export function AccordionProvider(props: AccordionProviderProps) {
-  const uncontrolled = useAccordionStore()
+  const uncontrolled = useAccordionStore({ type: props.type })
   const isControlledRef = useRef(!!props.expanded)
 
   const expanded = isControlledRef.current

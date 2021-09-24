@@ -20,10 +20,13 @@ const Template: Story = (args) => (
     </Accordion.Item>
     <Accordion.Item>
       <Accordion.Header>This is header 3</Accordion.Header>
-      <Accordion.Content>Content 2</Accordion.Content>
+      <Accordion.Content>Content 3</Accordion.Content>
     </Accordion.Item>
   </Accordion>
 )
 
-export const Primary = Template.bind({})
-Primary.args = {}
+export const Single = Template.bind({})
+Single.args = {}
+
+export const Multiple = Template.bind({})
+Multiple.args = { type: 'multiple' }

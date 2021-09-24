@@ -1,17 +1,33 @@
 import { useState, useCallback, useMemo } from 'react'
 
-export default function useUncontrolledAccordionState() {
+import { AccordionProps } from './Accordion'
+
+type Props = Pick<AccordionProps, 'type'>
+
+export default function useUncontrolledAccordionState(props: Props) {
   const [expanded, setExpanded] = useState<string[]>([])
 
   const onToggle = useCallback(
-    (itemId: string) => {
-      if (expanded.includes(itemId)) {
-        setExpanded([])
-      } else {
-        setExpanded([itemId])
+    (newItemId: string) => {
+      switch (props.type) {
+        case 'single':
+          if (expanded.includes(newItemId)) {
+            setExpanded([])
+          } else {
+            setExpanded([newItemId])
+          }
+          break
+        case 'multiple':
+          if (expanded.includes(newItemId)) {
+            setExpanded((prevIds) => prevIds.filter((id) => id !== newItemId))
+          } else {
+            setExpanded((prevIds) => [...prevIds, newItemId])
+          }
+          break
+        default:
       }
     },
-    [expanded]
+    [expanded, props.type]
   )
 
   return useMemo(

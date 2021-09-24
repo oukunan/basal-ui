@@ -6,17 +6,23 @@ import AccordionHeader from './AccordionHeader'
 import AccordionItem from './AccordionItem'
 import AccordionContent from './AccordionContent'
 
+type AccordionType = 'single' | 'multiple'
+
 export type AccordionProps = {
   expanded?: string[]
   children: React.ReactNode
   onToggle?: (itemId: string) => void
+  type?: AccordionType
 }
 
 function Accordion(props: AccordionProps) {
-  const { children, ...restProps } = props
+  const { children, type = 'single', ...restProps } = props
+
   return (
     <div>
-      <AccordionProvider {...restProps}>{props.children}</AccordionProvider>
+      <AccordionProvider type={type} {...restProps}>
+        {props.children}
+      </AccordionProvider>
     </div>
   )
 }
