@@ -1,6 +1,7 @@
 import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import Accordion from './Accordion'
+import keyboardKey from './keyboardKey'
 
 afterEach(cleanup)
 
@@ -73,11 +74,11 @@ it('should expand & hide header with space', () => {
   const content1 = getByText('Content 1')
 
   header1.focus()
-  fireEvent.keyDown(header1, { key: ' ', keyCode: 32 })
+  fireEvent.keyDown(header1, { key: keyboardKey.SPACE, keyCode: 32 })
   expect(header1).toHaveFocus()
   expect(content1).toBeVisible()
 
-  fireEvent.keyDown(header1, { key: ' ', keyCode: 32 })
+  fireEvent.keyDown(header1, { key: keyboardKey.SPACE, keyCode: 32 })
   expect(content1).not.toBeVisible()
   expect(header1).toHaveFocus()
 })
@@ -89,10 +90,10 @@ it('should expand & hide header with enter', () => {
   const content1 = getByText('Content 1')
 
   header1.focus()
-  fireEvent.keyDown(header1, { key: 'Enter', keyCode: 13 })
+  fireEvent.keyDown(header1, { key: keyboardKey.ENTER, keyCode: 13 })
   expect(header1).toHaveFocus()
   expect(content1).toBeVisible()
-  fireEvent.keyDown(header1, { key: 'Enter', keyCode: 13 })
+  fireEvent.keyDown(header1, { key: keyboardKey.ENTER, keyCode: 13 })
   expect(content1).not.toBeVisible()
   expect(header1).toHaveFocus()
 })
@@ -103,7 +104,7 @@ it('should focus a next header with down arrow', () => {
   const header1 = getByText('Header 1')
   header1.focus()
   fireEvent.keyDown(header1, {
-    key: 'ArrowDown',
+    key: keyboardKey.DOWN,
     keyCode: 40
   })
   expect(getByText('Header 2')).toHaveFocus()
@@ -115,7 +116,7 @@ it('should focus a previous header with up arrow', () => {
   const header2 = getByText('Header 2')
   header2.focus()
   fireEvent.keyDown(header2, {
-    key: 'ArrowUp',
+    key: keyboardKey.UP,
     keyCode: 38
   })
   expect(getByText('Header 1')).toHaveFocus()
@@ -127,7 +128,7 @@ it('should focus the first header with down arrow when on the last', () => {
   const header3 = getByText('Header 3')
   header3.focus()
   fireEvent.keyDown(header3, {
-    key: 'ArrowDown',
+    key: keyboardKey.DOWN,
     keyCode: 40
   })
   expect(getByText('Header 1')).toHaveFocus()
@@ -139,7 +140,7 @@ it('should focus the last header with down arrow when on the first', () => {
   const header1 = getByText('Header 1')
   header1.focus()
   fireEvent.keyDown(header1, {
-    key: 'ArrowUp',
+    key: keyboardKey.UP,
     keyCode: 38
   })
   expect(getByText('Header 3')).toHaveFocus()
@@ -151,7 +152,7 @@ it('should focus the first header with home is pressed', () => {
   const header2 = getByText('Header 2')
   header2.focus()
   fireEvent.keyDown(header2, {
-    key: 'Home',
+    key: keyboardKey.HOME,
     keyCode: 36
   })
   expect(getByText('Header 1')).toHaveFocus()
@@ -163,7 +164,7 @@ it('should focus the first header with end is pressed', () => {
   const header1 = getByText('Header 1')
   header1.focus()
   fireEvent.keyDown(header1, {
-    key: 'End',
+    key: keyboardKey.END,
     keyCode: 35
   })
   expect(getByText('Header 3')).toHaveFocus()

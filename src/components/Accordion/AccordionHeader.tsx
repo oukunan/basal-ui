@@ -8,17 +8,11 @@ import {
   focusPreviousSibling
 } from './utils/focus'
 
+import keyboardKey from './keyboardKey'
+
 type AccordionHeaderProps = {
   children: React.ReactNode
 }
-
-type AccordionKeyboardNavigationKey =
-  | 'ArrowDown'
-  | 'ArrowUp'
-  | 'Home'
-  | 'End'
-  | 'Enter'
-  | ' '
 
 export default function AccordionHeader(props: AccordionHeaderProps) {
   const { onToggle, contentId, headerId, isExpanded } =
@@ -26,28 +20,27 @@ export default function AccordionHeader(props: AccordionHeaderProps) {
 
   const navigateFocus = useCallback(
     (e: React.KeyboardEvent<HTMLButtonElement>) => {
-      const keyCode = e.key as AccordionKeyboardNavigationKey
       const elem = e.target as HTMLButtonElement
 
-      switch (keyCode) {
-        case ' ':
-        case 'Enter':
+      switch (e.key) {
+        case keyboardKey.SPACE:
+        case keyboardKey.ENTER:
           e.preventDefault()
           onToggle && onToggle()
           break
-        case 'ArrowDown':
+        case keyboardKey.DOWN:
           e.preventDefault()
           focusNextSibling(elem)
           break
-        case 'ArrowUp':
+        case keyboardKey.UP:
           e.preventDefault()
           focusPreviousSibling(elem)
           break
-        case 'Home':
+        case keyboardKey.HOME:
           e.preventDefault()
           focusFirstSibling(elem)
           break
-        case 'End':
+        case keyboardKey.END:
           focusLastSibling(elem)
           break
         default:
