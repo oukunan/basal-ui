@@ -2,7 +2,6 @@ import { Meta } from '@storybook/react/types-6-0'
 import { Story } from '@storybook/react'
 
 import Accordion from './Accordion'
-import AccordionSection from './AccordionSection'
 
 export default {
   title: 'Components/Accordion',
@@ -11,9 +10,18 @@ export default {
 
 const Template: Story = (args) => (
   <Accordion {...args}>
-    <AccordionSection header="Title 1">Content 1</AccordionSection>
-    <AccordionSection header="Title 2">Content 2</AccordionSection>
-    <AccordionSection header="Title 3">Content 3</AccordionSection>
+    <Accordion.Item>
+      <Accordion.Header>This is header 1</Accordion.Header>
+      <Accordion.Content>Content 1</Accordion.Content>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>This is header 2</Accordion.Header>
+      <Accordion.Content>Content 2</Accordion.Content>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>This is header 3</Accordion.Header>
+      <Accordion.Content>Content 2</Accordion.Content>
+    </Accordion.Item>
   </Accordion>
 )
 

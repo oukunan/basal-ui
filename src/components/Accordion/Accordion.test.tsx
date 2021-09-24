@@ -1,15 +1,23 @@
 import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import Accordion from './Accordion'
-import AccordionSection from './AccordionSection'
 
 afterEach(cleanup)
 
 const BaseComponent = () => (
   <Accordion>
-    <AccordionSection header="Header 1">Content 1</AccordionSection>
-    <AccordionSection header="Header 2">Content 2</AccordionSection>
-    <AccordionSection header="Header 3">Content 3</AccordionSection>
+    <Accordion.Item>
+      <Accordion.Header>Header 1</Accordion.Header>
+      <Accordion.Content>Content 1</Accordion.Content>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Header 2</Accordion.Header>
+      <Accordion.Content>Content 2</Accordion.Content>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>Header 3</Accordion.Header>
+      <Accordion.Content>Content 3</Accordion.Content>
+    </Accordion.Item>
   </Accordion>
 )
 
@@ -33,14 +41,17 @@ it('should show content for selected header when header is clicked', () => {
   expect(getByText('Content 2')).toBeVisible()
 })
 
-it.skip('should be able to close header once opened', () => {
+it('should be able to close header once opened', () => {
   const { getByText } = render(<BaseComponent />)
 
-  fireEvent.click(getByText('Header 1'))
+  const header1 = getByText('Header 1')
+
+  header1.focus()
+  fireEvent.click(header1)
   expect(getByText('Content 1')).toBeVisible()
-  fireEvent.click(getByText('Heading 1'))
+  fireEvent.click(header1)
   expect(getByText('Content 1')).not.toBeVisible()
-  fireEvent.click(getByText('Heading 1'))
+  fireEvent.click(header1)
   expect(getByText('Content 1')).toBeVisible()
 })
 
@@ -55,26 +66,29 @@ it('should have all headers focusable', async () => {
   expect(header2).toHaveFocus()
 })
 
-it.skip('should expand & hide header with space', () => {
+it('should expand & hide header with space', () => {
   const { getByText } = render(<BaseComponent />)
 
   const header1 = getByText('Header 1')
   const content1 = getByText('Content 1')
 
+  header1.focus()
   fireEvent.keyDown(header1, { key: ' ', keyCode: 32 })
   expect(header1).toHaveFocus()
   expect(content1).toBeVisible()
+
   fireEvent.keyDown(header1, { key: ' ', keyCode: 32 })
   expect(content1).not.toBeVisible()
   expect(header1).toHaveFocus()
 })
 
-it.skip('should expand & hide header with enter', () => {
+it('should expand & hide header with enter', () => {
   const { getByText } = render(<BaseComponent />)
 
   const header1 = getByText('Header 1')
   const content1 = getByText('Content 1')
 
+  header1.focus()
   fireEvent.keyDown(header1, { key: 'Enter', keyCode: 13 })
   expect(header1).toHaveFocus()
   expect(content1).toBeVisible()
