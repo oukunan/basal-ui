@@ -1,29 +1,32 @@
 import React from 'react'
 
-import { AccordionProvider } from './useAccordionContext'
-
 import AccordionHeader from './AccordionHeader'
 import AccordionItem from './AccordionItem'
 import AccordionContent from './AccordionContent'
+import AccordionSingle, { AccordionSingleProps } from './AccordionSingle'
+import AccordionMultiple, { AccordionMultipleProps } from './AccordionMultiple'
 
-type AccordionType = 'single' | 'multiple'
-
-export type AccordionProps = {
-  expanded?: string[]
-  children: React.ReactNode
-  onToggle?: (itemId: string) => void
-  type?: AccordionType
+// Type guard
+export function isSingleAccordion(props: any): props is AccordionSingleProps {
+  return props.type === 'single'
 }
 
-function Accordion(props: AccordionProps) {
-  const { children, type = 'single', ...restProps } = props
+export type CommonAccordionProps = {
+  type: 'single' | 'multiple'
+  children: React.ReactNode
+  allowZeroCollapse?: boolean
+}
 
-  return (
-    <div>
-      <AccordionProvider type={type} {...restProps}>
-        {props.children}
-      </AccordionProvider>
-    </div>
+function Accordion(props: AccordionSingleProps | AccordionMultipleProps) {
+  if (isSingleAccordion(props)) {
+    return <AccordionSingle {...props} />
+  }
+  if (!isSingleAccordion(props)) {
+    return <AccordionMultiple {...props} />
+  }
+
+  throw new Error(
+    "Invalid `type` props. It's should be either `single` or `multiple`"
   )
 }
 

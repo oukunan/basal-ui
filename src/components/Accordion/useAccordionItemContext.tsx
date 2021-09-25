@@ -27,7 +27,7 @@ export function AccordionItemProvider(props: {
       itemId: props.itemId,
       headerId: props.headerId,
       contentId: props.contentId,
-      isExpanded: !!accordionContext.expanded?.includes(props.itemId),
+      isExpanded: !!accordionContext.value?.includes(props.itemId),
       onToggle: () =>
         accordionContext.onToggle && accordionContext.onToggle(props.itemId)
     }),
