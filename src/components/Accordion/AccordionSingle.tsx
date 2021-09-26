@@ -1,34 +1,41 @@
 import { useMemo } from 'react'
 
-import { CommonAccordionProps } from './Accordion'
 import { AccordionContext } from './useAccordionContext'
 import useSingleAccordionState from './useSingleAccordionState'
+import { AccordionCommonProps } from './Accordion'
+import { ItemID } from './types'
 
-export type AccordionSingleProps = {
-  value?: string
-  preExpand?: string
-  onToggle?: (value: string) => void
-} & CommonAccordionProps
+type AccordionSingleInternalProps = AccordionCommonProps & {
+  value?: ItemID
+  preExpand?: ItemID
+  onToggle?: (value: ItemID) => void
+}
+
+export type AccordionSingleProps = AccordionSingleInternalProps & {
+  type: 'single'
+}
 
 export default function AccordionSingle(props: AccordionSingleProps) {
-  const { value, onToggle } = useSingleAccordionState({
-    value: props.value,
-    allowZeroCollapse: props.allowZeroCollapse,
-    preExpand: props.preExpand,
-    onToggle: props.onToggle
+  const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } = props
+
+  const state = useSingleAccordionState({
+    value,
+    allowZeroCollapse,
+    preExpand,
+    onToggle
   })
 
   const context = useMemo(
     () => ({
-      value: value ? [value] : [],
-      onToggle
+      value: state.value ? [state.value] : [],
+      onToggle: state.onToggle
     }),
-    [onToggle, value]
+    [state.onToggle, state.value]
   )
 
   return (
     <AccordionContext.Provider value={context}>
-      <div className={props.className}>{props.children}</div>
+      <div {...restProps} />
     </AccordionContext.Provider>
   )
 }

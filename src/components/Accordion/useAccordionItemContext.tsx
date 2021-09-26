@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useMemo } from 'react'
 
 import useAccordionContext from './useAccordionContext'
+import { ItemID } from './types'
 
 type AccordionItemContextType = {
-  itemId: string
+  itemId: ItemID
   headerId: string
   contentId: string
   isExpanded: boolean
@@ -15,7 +16,7 @@ const AccordionItemContext = createContext<AccordionItemContextType | null>(
 )
 
 export function AccordionItemProvider(props: {
-  itemId: string
+  itemId: ItemID
   headerId: string
   contentId: string
   children: React.ReactNode

@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback, useMemo } from 'react'
+
 import { AccordionSingleProps } from './AccordionSingle'
+import { ItemID } from './types'
 
 type UseSingleAccordionStateProps = Pick<
   AccordionSingleProps,
@@ -10,7 +12,7 @@ export default function useSingleAccordionState(
   props: UseSingleAccordionStateProps
 ) {
   const isControlled = useRef(!!props.value)
-  const [uncontrolledValue, setUncontrolledValue] = useState<string>(() => {
+  const [uncontrolledValue, setUncontrolledValue] = useState<ItemID>(() => {
     if (!isControlled.current) {
       return props.preExpand || ''
     }
@@ -25,7 +27,7 @@ export default function useSingleAccordionState(
     : setUncontrolledValue
 
   const onToggle = useCallback(
-    (newValue: string) => {
+    (newValue: ItemID) => {
       if (!updateAccordionValue) {
         return
       }

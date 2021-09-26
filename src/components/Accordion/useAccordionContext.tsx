@@ -1,8 +1,9 @@
 import { createContext, useContext } from 'react'
+import { ItemID } from './types'
 
 type AccordionContextType = {
-  value?: string[]
-  onToggle?: (itemId: string) => void
+  value?: ItemID[]
+  onToggle?: (value: ItemID) => void
 }
 
 export const AccordionContext = createContext<AccordionContextType | null>(null)

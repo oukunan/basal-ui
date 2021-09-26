@@ -1,18 +1,17 @@
 import React from 'react'
 
+import { DivAttributeProps } from './types'
 import AccordionHeader from './AccordionHeader'
 import AccordionItem from './AccordionItem'
 import AccordionContent from './AccordionContent'
 import AccordionSingle, { AccordionSingleProps } from './AccordionSingle'
 import AccordionMultiple, { AccordionMultipleProps } from './AccordionMultiple'
 
-export type CommonAccordionProps = {
-  type: 'single' | 'multiple'
-  children: React.ReactNode
+export type AccordionCommonProps = DivAttributeProps & {
   allowZeroCollapse?: boolean
   className?: string
+  children: React.ReactNode
 }
-
 function Accordion(props: AccordionSingleProps | AccordionMultipleProps) {
   if (props.type === 'single') {
     return <AccordionSingle {...(props as AccordionSingleProps)} />

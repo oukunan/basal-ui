@@ -1,34 +1,41 @@
 import { useMemo } from 'react'
 
-import { CommonAccordionProps } from './Accordion'
 import { AccordionContext } from './useAccordionContext'
 import useMultipleAccordionState from './useMultipleAccordionState'
+import { AccordionCommonProps } from './Accordion'
+import { ItemID } from './types'
 
-export type AccordionMultipleProps = {
-  value?: string[]
-  preExpand?: string[]
-  onToggle?: (value: string[]) => void
-} & CommonAccordionProps
+type AccordionMultipleInternalProps = AccordionCommonProps & {
+  value?: ItemID[]
+  preExpand?: ItemID[]
+  onToggle?: (value: ItemID[]) => void
+}
+
+export type AccordionMultipleProps = AccordionMultipleInternalProps & {
+  type: 'multiple'
+}
 
 export default function AccordionMultiple(props: AccordionMultipleProps) {
-  const { value, onToggle } = useMultipleAccordionState({
-    value: props.value,
-    preExpand: props.preExpand,
-    allowZeroCollapse: props.allowZeroCollapse,
-    onToggle: props.onToggle
+  const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } = props
+
+  const state = useMultipleAccordionState({
+    value,
+    preExpand,
+    allowZeroCollapse,
+    onToggle
   })
 
   const context = useMemo(
     () => ({
-      value,
-      onToggle
+      value: state.value,
+      onToggle: state.onToggle
     }),
-    [onToggle, value]
+    [state.onToggle, state.value]
   )
 
   return (
     <AccordionContext.Provider value={context}>
-      <div className={props.className}>{props.children}</div>
+      <div {...restProps} />
     </AccordionContext.Provider>
   )
 }
