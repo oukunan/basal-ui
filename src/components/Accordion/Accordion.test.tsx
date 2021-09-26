@@ -1,55 +1,152 @@
-import { render, fireEvent, cleanup } from '@testing-library/react'
+import { render, cleanup, fireEvent } from '@testing-library/react'
 
 import Accordion from './Accordion'
 import keyboardKey from './keyboardKey'
 
 afterEach(cleanup)
 
-const BaseComponent = ({ type }: { type?: 'single' | 'multiple' }) => (
-  <Accordion type={type}>
-    <Accordion.Item>
+const BaseComponent = ({
+  type,
+  preExpand,
+  allowZeroCollapse,
+  value,
+  onToggle
+}: any) => (
+  <Accordion
+    type={type}
+    preExpand={preExpand}
+    allowZeroCollapse={allowZeroCollapse}
+    value={value}
+    onToggle={onToggle}
+  >
+    <Accordion.Item value="one">
       <Accordion.Header>Header 1</Accordion.Header>
       <Accordion.Content>Content 1</Accordion.Content>
     </Accordion.Item>
-    <Accordion.Item>
+    <Accordion.Item value="two">
       <Accordion.Header>Header 2</Accordion.Header>
       <Accordion.Content>Content 2</Accordion.Content>
     </Accordion.Item>
-    <Accordion.Item>
+    <Accordion.Item value="three">
       <Accordion.Header>Header 3</Accordion.Header>
       <Accordion.Content>Content 3</Accordion.Content>
     </Accordion.Item>
   </Accordion>
 )
 
-it('should render Accordion with test data', () => {
-  render(<BaseComponent />)
+describe('single type', () => {
+  it('should not render the accordion content', () => {
+    const { getByText } = render(<BaseComponent type="single" />)
+
+    expect(getByText('Header 1')).toBeVisible()
+    expect(getByText('Header 2')).toBeVisible()
+    expect(getByText('Header 3')).toBeVisible()
+    expect(getByText('Content 1')).not.toBeVisible()
+    expect(getByText('Content 2')).not.toBeVisible()
+    expect(getByText('Content 3')).not.toBeVisible()
+  })
+
+  it('should render the `second` item with `preExpand` props', () => {
+    const { getByText } = render(
+      <BaseComponent type="single" preExpand="two" />
+    )
+
+    expect(getByText('Content 1')).not.toBeVisible()
+    expect(getByText('Content 2')).toBeVisible()
+    expect(getByText('Content 3')).not.toBeVisible()
+  })
+
+  it('should able to collapse all the items when `allowZeroCollapse=true`', () => {
+    const { getByText } = render(
+      <BaseComponent type="single" allowZeroCollapse />
+    )
+
+    const header1 = getByText('Header 1')
+    const content1 = getByText('Content 1')
+
+    fireEvent.click(header1)
+    expect(content1).toBeVisible()
+    fireEvent.click(header1)
+    expect(content1).not.toBeVisible()
+  })
+
+  it('should NOT able to collapse all the items when `allowZeroCollapse=false`', () => {
+    const { getByText } = render(
+      <BaseComponent type="single" allowZeroCollapse={false} />
+    )
+
+    const header1 = getByText('Header 1')
+    const content1 = getByText('Content 1')
+
+    fireEvent.click(header1)
+    expect(content1).toBeVisible()
+    fireEvent.click(header1)
+    expect(content1).toBeVisible()
+  })
 })
 
-it('should show the headings passed with test data', () => {
-  const { getByText } = render(<BaseComponent />)
+describe('multiple type', () => {
+  it('should not render the accordion content', () => {
+    const { getByText } = render(<BaseComponent type="multiple" />)
 
-  expect(getByText('Header 1')).toBeVisible()
-  expect(getByText('Header 2')).toBeVisible()
-})
+    expect(getByText('Header 1')).toBeVisible()
+    expect(getByText('Header 2')).toBeVisible()
+    expect(getByText('Header 3')).toBeVisible()
+    expect(getByText('Content 1')).not.toBeVisible()
+    expect(getByText('Content 2')).not.toBeVisible()
+    expect(getByText('Content 3')).not.toBeVisible()
+  })
 
-it('should be able to close header once opened', () => {
-  const { getByText } = render(<BaseComponent />)
+  it('should render the `second` item with `preExpand` props', () => {
+    const { getByText } = render(
+      <BaseComponent type="multiple" preExpand={['two', 'three']} />
+    )
 
-  const header1 = getByText('Header 1')
+    expect(getByText('Content 1')).not.toBeVisible()
+    expect(getByText('Content 2')).toBeVisible()
+    expect(getByText('Content 3')).toBeVisible()
+  })
 
-  header1.focus()
-  fireEvent.click(header1)
-  expect(getByText('Content 1')).toBeVisible()
-  fireEvent.click(header1)
-  expect(getByText('Content 1')).not.toBeVisible()
-  fireEvent.click(header1)
-  expect(getByText('Content 1')).toBeVisible()
+  it('should able to collapse all the items when `allowZeroCollapse=true`', () => {
+    const { getByText } = render(
+      <BaseComponent type="multiple" allowZeroCollapse />
+    )
+
+    const header1 = getByText('Header 1')
+    const content1 = getByText('Content 1')
+
+    const header2 = getByText('Header 2')
+    const content2 = getByText('Content 2')
+
+    fireEvent.click(header1)
+    expect(content1).toBeVisible()
+    fireEvent.click(header2)
+    expect(content2).toBeVisible()
+
+    fireEvent.click(header1)
+    expect(content1).not.toBeVisible()
+    fireEvent.click(header2)
+    expect(content2).not.toBeVisible()
+  })
+
+  it('should NOT able to collapse all the items when `allowZeroCollapse=false`', () => {
+    const { getByText } = render(
+      <BaseComponent type="multiple" allowZeroCollapse={false} />
+    )
+
+    const header1 = getByText('Header 1')
+    const content1 = getByText('Content 1')
+
+    fireEvent.click(header1)
+    expect(content1).toBeVisible()
+    fireEvent.click(header1)
+    expect(content1).toBeVisible()
+  })
 })
 
 describe('Accessibility', () => {
   it('should have all headers focusable', async () => {
-    const { getByText } = render(<BaseComponent />)
+    const { getByText } = render(<BaseComponent type="single" />)
 
     const header1 = getByText('Header 1')
     const header2 = getByText('Header 2')
@@ -59,13 +156,17 @@ describe('Accessibility', () => {
     expect(header2).toHaveFocus()
   })
 
-  it('should expand & hide header with space', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should expand & hide header with SPACE key', () => {
+    const { getByText } = render(
+      <BaseComponent type="single" allowZeroCollapse />
+    )
 
     const header1 = getByText('Header 1')
     const content1 = getByText('Content 1')
 
+    // TODO: Do we really need to focus this first?
     header1.focus()
+
     fireEvent.keyDown(header1, { key: keyboardKey.SPACE, keyCode: 32 })
     expect(header1).toHaveFocus()
     expect(content1).toBeVisible()
@@ -75,13 +176,17 @@ describe('Accessibility', () => {
     expect(header1).toHaveFocus()
   })
 
-  it('should expand & hide header with enter', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should expand & hide header with ENTER key', () => {
+    const { getByText } = render(
+      <BaseComponent type="single" allowZeroCollapse />
+    )
 
     const header1 = getByText('Header 1')
     const content1 = getByText('Content 1')
 
+    // TODO: Do we really need to focus this first?
     header1.focus()
+
     fireEvent.keyDown(header1, { key: keyboardKey.ENTER, keyCode: 13 })
     expect(header1).toHaveFocus()
     expect(content1).toBeVisible()
@@ -90,11 +195,10 @@ describe('Accessibility', () => {
     expect(header1).toHaveFocus()
   })
 
-  it('should focus a next header with down arrow', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should focus a next header with DOWN ARROW key', () => {
+    const { getByText } = render(<BaseComponent type="single" />)
 
     const header1 = getByText('Header 1')
-    header1.focus()
     fireEvent.keyDown(header1, {
       key: keyboardKey.DOWN,
       keyCode: 40
@@ -102,11 +206,10 @@ describe('Accessibility', () => {
     expect(getByText('Header 2')).toHaveFocus()
   })
 
-  it('should focus a previous header with up arrow', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should focus a previous header with UP ARROW key', () => {
+    const { getByText } = render(<BaseComponent type="single" />)
 
     const header2 = getByText('Header 2')
-    header2.focus()
     fireEvent.keyDown(header2, {
       key: keyboardKey.UP,
       keyCode: 38
@@ -114,11 +217,10 @@ describe('Accessibility', () => {
     expect(getByText('Header 1')).toHaveFocus()
   })
 
-  it('should focus the first header with down arrow when on the last', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should focus the first header with DOWN ARROW key when on the last', () => {
+    const { getByText } = render(<BaseComponent type="single" />)
 
     const header3 = getByText('Header 3')
-    header3.focus()
     fireEvent.keyDown(header3, {
       key: keyboardKey.DOWN,
       keyCode: 40
@@ -126,11 +228,10 @@ describe('Accessibility', () => {
     expect(getByText('Header 1')).toHaveFocus()
   })
 
-  it('should focus the last header with down arrow when on the first', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should focus the last header with DOWN ARROW key when on the first', () => {
+    const { getByText } = render(<BaseComponent type="single" />)
 
     const header1 = getByText('Header 1')
-    header1.focus()
     fireEvent.keyDown(header1, {
       key: keyboardKey.UP,
       keyCode: 38
@@ -138,11 +239,10 @@ describe('Accessibility', () => {
     expect(getByText('Header 3')).toHaveFocus()
   })
 
-  it('should focus the first header with home is pressed', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should focus the first header with HOME key is pressed', () => {
+    const { getByText } = render(<BaseComponent type="single" />)
 
     const header2 = getByText('Header 2')
-    header2.focus()
     fireEvent.keyDown(header2, {
       key: keyboardKey.HOME,
       keyCode: 36
@@ -150,44 +250,15 @@ describe('Accessibility', () => {
     expect(getByText('Header 1')).toHaveFocus()
   })
 
-  it('should focus the first header with end is pressed', () => {
-    const { getByText } = render(<BaseComponent />)
+  it('should focus the first header with END key is pressed', () => {
+    const { getByText } = render(<BaseComponent type="single" />)
 
     const header1 = getByText('Header 1')
-    header1.focus()
     fireEvent.keyDown(header1, {
       key: keyboardKey.END,
       keyCode: 35
     })
     expect(getByText('Header 3')).toHaveFocus()
-  })
-})
-
-describe('Uncontrolled Accordion', () => {
-  describe('Single type (default)', () => {
-    it('should show only 1 content', () => {
-      const { getByText } = render(<BaseComponent />)
-
-      const content1 = getByText('Content 1')
-      fireEvent.click(getByText('Header 1'))
-      expect(content1).toBeVisible()
-      fireEvent.click(getByText('Header 2'))
-      expect(getByText('Content 2')).toBeVisible()
-      expect(content1).not.toBeVisible()
-    })
-  })
-
-  describe('Multiple type', () => {
-    it('should able to show multiple of content', () => {
-      const { getByText } = render(<BaseComponent type="multiple" />)
-
-      const content1 = getByText('Content 1')
-      fireEvent.click(getByText('Header 1'))
-      expect(content1).toBeVisible()
-      fireEvent.click(getByText('Header 2'))
-      expect(getByText('Content 2')).toBeVisible()
-      expect(content1).toBeVisible()
-    })
   })
 })
 
