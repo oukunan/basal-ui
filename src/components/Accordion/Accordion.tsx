@@ -6,11 +6,6 @@ import AccordionContent from './AccordionContent'
 import AccordionSingle, { AccordionSingleProps } from './AccordionSingle'
 import AccordionMultiple, { AccordionMultipleProps } from './AccordionMultiple'
 
-// Type guard
-export function isSingleAccordion(props: any): props is AccordionSingleProps {
-  return props.type === 'single'
-}
-
 export type CommonAccordionProps = {
   type: 'single' | 'multiple'
   children: React.ReactNode
@@ -19,15 +14,15 @@ export type CommonAccordionProps = {
 }
 
 function Accordion(props: AccordionSingleProps | AccordionMultipleProps) {
-  if (isSingleAccordion(props)) {
-    return <AccordionSingle {...props} />
+  if (props.type === 'single') {
+    return <AccordionSingle {...(props as AccordionSingleProps)} />
   }
-  if (!isSingleAccordion(props)) {
-    return <AccordionMultiple {...props} />
+  if (props.type === 'multiple') {
+    return <AccordionMultiple {...(props as AccordionMultipleProps)} />
   }
 
   throw new Error(
-    "Invalid `type` props. It's should be either `single` or `multiple`"
+    "Invalid Accordion `type` props. It's should be either `single` or `multiple`"
   )
 }
 

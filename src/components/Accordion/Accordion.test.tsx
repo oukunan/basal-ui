@@ -263,3 +263,15 @@ describe('Accessibility', () => {
 })
 
 describe.skip('controlled Accordion', () => {})
+
+it('should throw en error when pass INVALID accordion type', () => {
+  let errorMessage
+  try {
+    render(<BaseComponent type="invalidType" />)
+  } catch (e: any) {
+    errorMessage = e.message
+  }
+  expect(errorMessage).toBe(
+    "Invalid Accordion `type` props. It's should be either `single` or `multiple`"
+  )
+})
