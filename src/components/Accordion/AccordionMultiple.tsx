@@ -28,7 +28,7 @@ export default function AccordionMultiple(props: AccordionMultipleProps) {
 
   return (
     <AccordionContext.Provider value={context}>
-      {props.children}
+      <div className={props.className}>{props.children}</div>
     </AccordionContext.Provider>
   )
 }

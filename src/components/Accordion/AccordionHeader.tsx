@@ -12,6 +12,8 @@ import keyboardKey from './keyboardKey'
 
 type AccordionHeaderProps = {
   children: React.ReactNode
+  headerClassName?: string
+  buttonClassName?: string
 }
 
 export default function AccordionHeader(props: AccordionHeaderProps) {
@@ -50,8 +52,12 @@ export default function AccordionHeader(props: AccordionHeaderProps) {
   )
 
   return (
-    <h3 data-accordion-component="AccordionHeader">
+    <h3
+      className={props.headerClassName}
+      data-accordion-component="AccordionHeader"
+    >
       <button
+        className={props.buttonClassName}
         id={headerId}
         aria-controls={contentId}
         aria-expanded={isExpanded}

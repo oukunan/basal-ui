@@ -15,6 +15,7 @@ export type CommonAccordionProps = {
   type: 'single' | 'multiple'
   children: React.ReactNode
   allowZeroCollapse?: boolean
+  className?: string
 }
 
 function Accordion(props: AccordionSingleProps | AccordionMultipleProps) {
