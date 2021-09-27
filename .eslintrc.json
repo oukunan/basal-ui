@@ -20,6 +20,8 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "react/display-name": "off",
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "no-use-before-define": "off",

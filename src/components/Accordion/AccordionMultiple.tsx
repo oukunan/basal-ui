@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 import { AccordionContext } from './useAccordionContext'
 import useMultipleAccordionState from './useMultipleAccordionState'
@@ -15,27 +15,30 @@ export type AccordionMultipleProps = AccordionMultipleInternalProps & {
   type: 'multiple'
 }
 
-export default function AccordionMultiple(props: AccordionMultipleProps) {
-  const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } = props
+export default React.forwardRef<HTMLDivElement, AccordionMultipleProps>(
+  function AccordionMultiple(props, ref) {
+    const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } =
+      props
 
-  const state = useMultipleAccordionState({
-    value,
-    preExpand,
-    allowZeroCollapse,
-    onToggle
-  })
+    const state = useMultipleAccordionState({
+      value,
+      preExpand,
+      allowZeroCollapse,
+      onToggle
+    })
 
-  const context = useMemo(
-    () => ({
-      value: state.value,
-      onToggle: state.onToggle
-    }),
-    [state.onToggle, state.value]
-  )
+    const context = useMemo(
+      () => ({
+        value: state.value,
+        onToggle: state.onToggle
+      }),
+      [state.onToggle, state.value]
+    )
 
-  return (
-    <AccordionContext.Provider value={context}>
-      <div {...restProps} />
-    </AccordionContext.Provider>
-  )
-}
+    return (
+      <AccordionContext.Provider value={context}>
+        <div ref={ref} {...restProps} />
+      </AccordionContext.Provider>
+    )
+  }
+)

@@ -6,16 +6,19 @@ type AccordionContentProps = {
   className?: string
 }
 
-export default function AccordionContent(props: AccordionContentProps) {
-  const { headerId, isExpanded } = useAccordionItemContext()
-  return (
-    <div
-      className={props.className}
-      role="region"
-      aria-labelledby={headerId}
-      hidden={!isExpanded}
-    >
-      {props.children}
-    </div>
-  )
-}
+export default React.forwardRef<HTMLDivElement, AccordionContentProps>(
+  function AccordionContent(props, ref) {
+    const { headerId, isExpanded } = useAccordionItemContext()
+    return (
+      <div
+        ref={ref}
+        className={props.className}
+        role="region"
+        aria-labelledby={headerId}
+        hidden={!isExpanded}
+      >
+        {props.children}
+      </div>
+    )
+  }
+)

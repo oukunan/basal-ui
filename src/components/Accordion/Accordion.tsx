@@ -12,22 +12,38 @@ export type AccordionCommonProps = DivAttributeProps & {
   className?: string
   children: React.ReactNode
 }
-function Accordion(props: AccordionSingleProps | AccordionMultipleProps) {
+
+type AccordionCompoundedComponentType = React.ForwardRefExoticComponent<
+  (AccordionSingleProps | AccordionMultipleProps) &
+    React.RefAttributes<HTMLDivElement>
+> & {
+  Item: typeof AccordionItem
+  Header: typeof AccordionHeader
+  Content: typeof AccordionContent
+}
+
+const Accordion = React.forwardRef<
+  HTMLDivElement,
+  AccordionSingleProps | AccordionMultipleProps
+>((props, ref) => {
   if (props.type === 'single') {
-    return <AccordionSingle {...(props as AccordionSingleProps)} />
+    return <AccordionSingle {...(props as AccordionSingleProps)} ref={ref} />
   }
   if (props.type === 'multiple') {
-    return <AccordionMultiple {...(props as AccordionMultipleProps)} />
+    return (
+      <AccordionMultiple {...(props as AccordionMultipleProps)} ref={ref} />
+    )
   }
 
   throw new Error(
     "Invalid Accordion `type` props. It's should be either `single` or `multiple`"
   )
-}
+}) as AccordionCompoundedComponentType
+
+Accordion.displayName = 'Accordion'
 
 Accordion.Item = AccordionItem
 Accordion.Header = AccordionHeader
 Accordion.Content = AccordionContent
 
-// Need to export here, Storybook give an error `Uncaught SyntaxError: Unexpected token 'default'`
 export default Accordion
