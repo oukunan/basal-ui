@@ -1,10 +1,14 @@
 {
+  "private": true,
   "name": "x-ui",
   "version": "1.0.0",
   "license": "MIT",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
+  "workspaces": [
+    "ssr-test"
+  ],
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@rollup/plugin-commonjs": "^20.0.0",

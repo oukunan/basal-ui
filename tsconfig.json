@@ -18,9 +18,10 @@
     "noEmit": true,
     "noImplicitAny": false,
     "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
-      "@x-ui/accordion": ["./src/components/accordion"],
-      "@x-ui/breadcrumb": ["./src/components/breadcrumb"]
+      "@x-ui/accordion": ["src/components/accordion"],
+      "@x-ui/breadcrumb": ["src/components/breadcrumb"]
     }
   },
   "include": ["src"],
