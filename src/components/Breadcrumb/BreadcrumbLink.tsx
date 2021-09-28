@@ -9,10 +9,11 @@ const ListItem = styled('li', {
 
 export default function BreadcrumbLink(props: {
   link: BreadcrumbLinkType
+  className?: string
   lastLink?: boolean
 }) {
   return (
-    <ListItem>
+    <ListItem className={props.className}>
       <a href={props.link.href} aria-current={props.lastLink && 'page'}>
         {props.link.label}
       </a>
