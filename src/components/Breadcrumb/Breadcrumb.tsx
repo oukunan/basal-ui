@@ -11,6 +11,7 @@ const OrderList = styled('ol', {
 type BreadcrumbProps = {
   links: BreadcrumbLinkType[]
   separator?: React.ReactNode
+  separatorGap?: string | number
   navClassName?: string
   listClassName?: string
   linkClassName?: string
@@ -18,13 +19,11 @@ type BreadcrumbProps = {
 
 export default React.forwardRef<HTMLElement, BreadcrumbProps>(
   function Breadcrumb(props, ref) {
-    const { separator = '/', links } = props
-
     return (
       <nav aria-label="Breadcrumb" ref={ref} className={props.navClassName}>
         <OrderList className={props.listClassName}>
-          {links.reduce((acc: React.ReactNode[], link, index) => {
-            if (index < links.length - 1) {
+          {props.links.reduce((acc: React.ReactNode[], link, index) => {
+            if (index < props.links.length - 1) {
               acc = acc.concat(
                 <BreadcrumbLink
                   key={`item-${index}`}
@@ -33,7 +32,8 @@ export default React.forwardRef<HTMLElement, BreadcrumbProps>(
                 />,
                 <BreadcrumbSeparator
                   key={`separator-${index}`}
-                  separator={separator}
+                  separator={props.separator}
+                  separatorGap={props.separatorGap}
                 />
               )
             } else {

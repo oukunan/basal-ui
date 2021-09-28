@@ -8,6 +8,15 @@ const Separator = styled('li', {
 
 export default function BreadcrumbSeparator(props: {
   separator: React.ReactNode
+  separatorGap?: string | number
 }) {
-  return <Separator aria-hidden>{props.separator}</Separator>
+  const { separator = '/', separatorGap } = props
+  return (
+    <Separator
+      css={{ margin: separatorGap && `0 ${separatorGap}px` }}
+      aria-hidden
+    >
+      {separator}
+    </Separator>
+  )
 }
