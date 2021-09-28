@@ -1,40 +1,41 @@
+import React from 'react'
 import { styled } from '../../../stitches.config'
 
+import BreadcrumbLink, { BreadcrumbLinkType } from './BreadcrumbLink'
+import BreadcrumbSeparator from './BreadcrumbSeparator'
+
 const OrderList = styled('ol', {
-  listStyle: 'none',
-  margin: 0,
-  padding: 0
-})
-
-const ListItem = styled('li', {
-  display: 'inline',
-  margin: 0,
-  padding: 0,
-
-  '& a[aria-current="page"]': {
-    fontWeight: 'bold'
-  }
+  listStyle: 'none'
 })
 
 type BreadcrumbProps = {
-  links: { label: string; href: string }[]
+  links: BreadcrumbLinkType[]
+  separator?: React.ReactNode
 }
 
 export default function Breadcrumb(props: BreadcrumbProps) {
+  const { separator = '/', links } = props
+
   return (
     <nav aria-label="Breadcrumb">
       <OrderList>
-        {props.links.map((link, index) => {
-          const isLastLink = index === props.links.length - 1
+        {links.reduce((acc: React.ReactNode[], link, index) => {
+          if (index < links.length - 1) {
+            acc = acc.concat(
+              <BreadcrumbLink key={`item-${index}`} link={link} />,
+              <BreadcrumbSeparator
+                key={`separator-${index}`}
+                separator={separator}
+              />
+            )
+          } else {
+            acc = acc.concat(
+              <BreadcrumbLink key={`item-${index}`} link={link} lastLink />
+            )
+          }
 
-          return (
-            <ListItem key={index}>
-              <a href={link.href} aria-current={isLastLink && 'page'}>
-                {link.label}
-              </a>
-            </ListItem>
-          )
-        })}
+          return acc
+        }, [])}
       </OrderList>
     </nav>
   )
