@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 
+import { styled } from '../.././../stitches.config'
 import useAccordionItemContext from './useAccordionItemContext'
 import {
   focusFirstSibling,
@@ -9,6 +10,10 @@ import {
 } from './utils/focus'
 
 import keyboardKey from './keyboardKey'
+
+const Header = styled('h3', {
+  margin: 0
+})
 
 type AccordionHeaderProps = {
   children: React.ReactNode
@@ -53,7 +58,7 @@ export default React.forwardRef<HTMLDivElement, AccordionHeaderProps>(
     )
 
     return (
-      <h3
+      <Header
         ref={ref}
         className={props.headerClassName}
         data-accordion-component="AccordionHeader"
@@ -69,7 +74,7 @@ export default React.forwardRef<HTMLDivElement, AccordionHeaderProps>(
         >
           {props.children}
         </button>
-      </h3>
+      </Header>
     )
   }
 )
