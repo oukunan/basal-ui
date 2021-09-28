@@ -5,7 +5,9 @@ import BreadcrumbLink, { BreadcrumbLinkType } from './BreadcrumbLink'
 import BreadcrumbSeparator from './BreadcrumbSeparator'
 
 const OrderList = styled('ol', {
-  listStyle: 'none'
+  listStyle: 'none',
+  padding: 0,
+  margin: 0
 })
 
 type BreadcrumbProps = {
