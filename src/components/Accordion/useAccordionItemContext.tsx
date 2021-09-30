@@ -2,6 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react'
 
 import useAccordionContext from './useAccordionContext'
 import { ItemID } from './types'
+import useGenerateId from '../../utils/hooks/useGenerateId'
 
 type AccordionItemContextType = {
   itemId: ItemID
@@ -17,22 +18,21 @@ const AccordionItemContext = createContext<AccordionItemContextType | null>(
 
 export function AccordionItemProvider(props: {
   itemId: ItemID
-  headerId: string
-  contentId: string
   children: React.ReactNode
 }) {
   const accordionContext = useAccordionContext()
+  const id = useGenerateId()
 
   const context = useMemo(
     () => ({
       itemId: props.itemId,
-      headerId: props.headerId,
-      contentId: props.contentId,
+      headerId: `header-${id}`,
+      contentId: `content-${id}`,
       isExpanded: !!accordionContext.value?.includes(props.itemId),
       onToggle: () =>
         accordionContext.onToggle && accordionContext.onToggle(props.itemId)
     }),
-    [accordionContext, props.contentId, props.headerId, props.itemId]
+    [accordionContext, id, props.itemId]
   )
 
   return (
