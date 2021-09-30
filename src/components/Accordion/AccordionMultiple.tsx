@@ -16,7 +16,7 @@ export type AccordionMultipleProps = AccordionMultipleInternalProps & {
 }
 
 export default React.forwardRef<HTMLDivElement, AccordionMultipleProps>(
-  function AccordionMultiple(props, ref) {
+  function AccordionMultiple(props, forwardedRef) {
     const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } =
       props
 
@@ -37,7 +37,7 @@ export default React.forwardRef<HTMLDivElement, AccordionMultipleProps>(
 
     return (
       <AccordionContext.Provider value={context}>
-        <div ref={ref} {...restProps} />
+        <div ref={forwardedRef} {...restProps} />
       </AccordionContext.Provider>
     )
   }

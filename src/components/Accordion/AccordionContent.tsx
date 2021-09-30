@@ -7,12 +7,12 @@ type AccordionContentProps = {
 }
 
 export default React.forwardRef<HTMLDivElement, AccordionContentProps>(
-  function AccordionContent(props, ref) {
+  function AccordionContent(props, forwardedRef) {
     const { contentId, headerId, isExpanded } = useAccordionItemContext()
     return (
       <div
         id={contentId}
-        ref={ref}
+        ref={forwardedRef}
         className={props.className}
         role="region"
         aria-labelledby={headerId}

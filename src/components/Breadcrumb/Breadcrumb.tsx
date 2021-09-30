@@ -20,9 +20,13 @@ type BreadcrumbProps = {
 }
 
 export default React.forwardRef<HTMLElement, BreadcrumbProps>(
-  function Breadcrumb(props, ref) {
+  function Breadcrumb(props, forwardedRef) {
     return (
-      <nav aria-label="Breadcrumb" ref={ref} className={props.navClassName}>
+      <nav
+        aria-label="Breadcrumb"
+        ref={forwardedRef}
+        className={props.navClassName}
+      >
         <OrderList className={props.listClassName}>
           {props.links.reduce((acc: React.ReactNode[], link, index) => {
             if (index < props.links.length - 1) {

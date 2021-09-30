@@ -22,7 +22,7 @@ type AccordionHeaderProps = {
 }
 
 export default React.forwardRef<HTMLDivElement, AccordionHeaderProps>(
-  function AccordionHeader(props, ref) {
+  function AccordionHeader(props, forwardedRef) {
     const { onToggle, contentId, headerId, isExpanded } =
       useAccordionItemContext()
 
@@ -59,7 +59,7 @@ export default React.forwardRef<HTMLDivElement, AccordionHeaderProps>(
 
     return (
       <Header
-        ref={ref}
+        ref={forwardedRef}
         className={props.headerClassName}
         data-accordion-component="AccordionHeader"
       >

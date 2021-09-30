@@ -16,7 +16,7 @@ export type AccordionSingleProps = AccordionSingleInternalProps & {
 }
 
 export default React.forwardRef<HTMLDivElement, AccordionSingleProps>(
-  function AccordionSingle(props, ref) {
+  function AccordionSingle(props, forwardRef) {
     const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } =
       props
 
@@ -37,7 +37,7 @@ export default React.forwardRef<HTMLDivElement, AccordionSingleProps>(
 
     return (
       <AccordionContext.Provider value={context}>
-        <div ref={ref} {...restProps} />
+        <div ref={forwardRef} {...restProps} />
       </AccordionContext.Provider>
     )
   }

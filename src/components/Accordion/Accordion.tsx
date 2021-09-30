@@ -26,21 +26,29 @@ type AccordionCompoundedComponentType = React.ForwardRefExoticComponent<
 const Accordion = React.forwardRef<
   HTMLDivElement,
   AccordionSingleProps | AccordionMultipleProps
->((props, ref) => {
+>((props, forwardedRef) => {
   const renderAccordion = useCallback(() => {
     if (props.type === 'single') {
-      return <AccordionSingle {...(props as AccordionSingleProps)} ref={ref} />
+      return (
+        <AccordionSingle
+          {...(props as AccordionSingleProps)}
+          ref={forwardedRef}
+        />
+      )
     }
     if (props.type === 'multiple') {
       return (
-        <AccordionMultiple {...(props as AccordionMultipleProps)} ref={ref} />
+        <AccordionMultiple
+          {...(props as AccordionMultipleProps)}
+          ref={forwardedRef}
+        />
       )
     }
 
     throw new Error(
       "Invalid Accordion `type` props. It's should be either `single` or `multiple`"
     )
-  }, [props, ref])
+  }, [props, forwardedRef])
 
   return <IdProvider>{renderAccordion()}</IdProvider>
 }) as AccordionCompoundedComponentType
