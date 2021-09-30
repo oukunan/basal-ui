@@ -21,7 +21,8 @@
     "baseUrl": ".",
     "paths": {
       "@x-ui/accordion": ["src/components/accordion"],
-      "@x-ui/breadcrumb": ["src/components/breadcrumb"]
+      "@x-ui/breadcrumb": ["src/components/breadcrumb"],
+      "@x-ui/portal": ["src/components/portal/src"]
     }
   },
   "include": ["src"],
