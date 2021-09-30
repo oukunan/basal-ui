@@ -14,6 +14,7 @@ export default function BreadcrumbSeparator(props: {
   return (
     <Separator
       css={{ margin: separatorGap && `0 ${separatorGap}px` }}
+      data-breadcrumb-component="BreadcrumbSeparator"
       aria-hidden
     >
       {separator}
