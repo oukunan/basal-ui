@@ -7,21 +7,28 @@ export default {
   component: Breadcrumb
 } as Meta
 
-export const Basic = () => (
-  <Breadcrumb
-    links={[
-      {
-        label: 'Link 1',
-        href: ''
-      },
-      {
-        label: 'Link 2',
-        href: ''
-      },
-      {
-        label: 'Link 3',
-        href: ''
-      }
-    ]}
-  />
+const baseLinks = [
+  {
+    label: 'Link 1',
+    href: ''
+  },
+  {
+    label: 'Link 2',
+    href: ''
+  },
+  {
+    label: 'Link 3',
+    href: ''
+  }
+]
+
+export const Default = () => <Breadcrumb links={baseLinks} />
+
+export const WithStringSeparator = () => (
+  <Breadcrumb separator=">" links={baseLinks} />
+)
+
+const MockSeparator = () => <>😎</>
+export const WithComponentSeparator = () => (
+  <Breadcrumb separator={<MockSeparator />} links={baseLinks} />
 )
