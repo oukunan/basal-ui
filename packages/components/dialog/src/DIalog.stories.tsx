@@ -8,10 +8,8 @@ export default {
 } as Meta
 
 export const Default = () => (
-  <Dialog
-    open
-    title="This is title"
-    content={<input />}
-    onClose={() => console.log('onClose')}
-  />
+  <Dialog open onClose={() => console.log('onClose')}>
+    <Dialog.Header>Dialog Header</Dialog.Header>
+    <Dialog.Description>Dialog Description</Dialog.Description>
+  </Dialog>
 )

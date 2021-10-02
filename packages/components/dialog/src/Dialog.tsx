@@ -2,11 +2,12 @@ import React, { useRef, useEffect } from 'react'
 
 import { styled } from '../../../../stitches.config'
 import Portal from '../../portal/src/Portal'
+import DialogDescription from './DialogDescription'
+import DialogHeader from './DialogHeader'
 
 type DialogProps = {
-  open?: boolean
-  title: React.ReactNode
-  content: React.ReactNode
+  open: boolean
+  children: React.ReactNode
   onClose: () => void
 }
 
@@ -40,7 +41,7 @@ const DialogCloseButton = styled('button', {
   right: '10px'
 })
 
-export default function Dialog(props: DialogProps) {
+function Dialog(props: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null)
 
   const handleTabKey = (e) => {
@@ -99,14 +100,17 @@ export default function Dialog(props: DialogProps) {
           aria-modal="true"
           role="dialog"
         >
-          <h2 id="dialog1_label">{props.title}</h2>
-          <div>{props.content}</div>
+          {props.children}
           <DialogCloseButton onClick={props.onClose}>
             <span aria-hidden="true">×</span>
           </DialogCloseButton>
-          <button>Another button</button>
         </DialogBox>
       </DialogOverlay>
     </Portal>
   )
 }
+
+Dialog.Header = DialogHeader
+Dialog.Description = DialogDescription
+
+export default Dialog

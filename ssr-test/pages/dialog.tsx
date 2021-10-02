@@ -6,12 +6,10 @@ export default function DialogPage() {
   return (
     <div>
       <button onClick={() => setOpen(true)}>Open the dialog</button>
-      <Dialog
-        open={open}
-        title="Dialog title"
-        content="Dialog content"
-        onClose={() => setOpen(false)}
-      />
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <Dialog.Header>Dialog Header</Dialog.Header>
+        <Dialog.Description>Dialog Description</Dialog.Description>
+      </Dialog>
     </div>
   )
 }
