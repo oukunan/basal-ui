@@ -20,11 +20,11 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@x-ui/accordion": ["src/components/accordion"],
-      "@x-ui/breadcrumb": ["src/components/breadcrumb"],
-      "@x-ui/portal": ["src/components/portal/src"]
+      "@x-ui/accordion": ["packages/components/accordion/src"],
+      "@x-ui/breadcrumb": ["packages/components/breadcrumb/src"],
+      "@x-ui/portal": ["packages/components/portal/src"]
     }
   },
-  "include": ["src"],
+  "include": ["packages"],
   "exclude": ["node_modules", "lib"]
 }

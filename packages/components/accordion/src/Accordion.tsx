@@ -6,7 +6,7 @@ import AccordionItem from './AccordionItem'
 import AccordionContent from './AccordionContent'
 import AccordionSingle, { AccordionSingleProps } from './AccordionSingle'
 import AccordionMultiple, { AccordionMultipleProps } from './AccordionMultiple'
-import { IdProvider } from '../../utils/hooks/useGenerateId'
+import { IdProvider } from '../../../utils/hooks/useGenerateId'
 
 export type AccordionCommonProps = DivAttributeProps & {
   allowZeroCollapse?: boolean

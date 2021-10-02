@@ -2,7 +2,7 @@ import React, { createContext, useContext, useMemo } from 'react'
 
 import useAccordionContext from './useAccordionContext'
 import { ItemID } from './types'
-import useGenerateId from '../../utils/hooks/useGenerateId'
+import useGenerateId from '../../../utils/hooks/useGenerateId'
 
 type AccordionItemContextType = {
   itemId: ItemID

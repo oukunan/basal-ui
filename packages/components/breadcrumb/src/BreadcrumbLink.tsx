@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { styled } from '../../../stitches.config'
+import { styled } from '../../../../stitches.config'
 
 export type BreadcrumbLinkType = { label: React.ReactNode; href: string }
 
