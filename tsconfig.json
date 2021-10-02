@@ -22,7 +22,8 @@
     "paths": {
       "@x-ui/accordion": ["packages/components/accordion/src"],
       "@x-ui/breadcrumb": ["packages/components/breadcrumb/src"],
-      "@x-ui/portal": ["packages/components/portal/src"]
+      "@x-ui/portal": ["packages/components/portal/src"],
+      "@x-ui/dialog": ["packages/components/dialog/src"]
     }
   },
   "include": ["packages"],
