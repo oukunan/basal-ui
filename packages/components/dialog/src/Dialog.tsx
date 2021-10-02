@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react'
 
-import { styled } from '../../../stitches.config'
-import Portal from '../portal/src/Portal'
+import { styled } from '../../../../stitches.config'
+import Portal from '../../portal/src/Portal'
 
 type DialogProps = {
   open?: boolean
-  title?: React.ReactNode
+  title: React.ReactNode
   content: React.ReactNode
   onClose: () => void
 }
