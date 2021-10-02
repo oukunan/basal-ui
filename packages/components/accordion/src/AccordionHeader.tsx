@@ -9,7 +9,7 @@ import {
   focusPreviousSibling
 } from './utils/focus'
 
-import keyboardKey from './keyboardKey'
+import keyboardKey from '../../../utils/keyboardKey'
 
 const Header = styled('h3', {
   margin: 0

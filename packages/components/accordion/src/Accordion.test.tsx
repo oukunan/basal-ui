@@ -1,7 +1,7 @@
 import { render, cleanup, fireEvent } from '@testing-library/react'
 
 import Accordion from './Accordion'
-import keyboardKey from './keyboardKey'
+import keyboardKey from '../../../utils/keyboardKey'
 
 afterEach(cleanup)
 
