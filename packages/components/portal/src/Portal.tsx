@@ -19,7 +19,7 @@ export default React.forwardRef<HTMLDivElement, PortalProps>(function Portal(
   return ReactDOM.createPortal(
     <div
       {...props}
-      id="x-ui__portal-root"
+      data-x-portal=""
       ref={forwardedRef}
       style={{
         position: 'absolute',
