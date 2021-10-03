@@ -9,7 +9,6 @@ export default {
 
 export const Default = () => (
   <Dialog open onClose={() => console.log('onClose')}>
-    <Dialog.Header>Dialog Header</Dialog.Header>
-    <Dialog.Description>Dialog Description</Dialog.Description>
+    Dialog content
   </Dialog>
 )

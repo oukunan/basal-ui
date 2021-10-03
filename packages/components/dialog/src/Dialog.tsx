@@ -2,43 +2,22 @@ import React, { useRef, useEffect } from 'react'
 
 import { styled } from '../../../../stitches.config'
 import Portal from '../../portal/src/Portal'
-import DialogDescription from './DialogDescription'
-import DialogHeader from './DialogHeader'
 
 type DialogProps = {
   open: boolean
   children: React.ReactNode
+  overlayClassName?: string
+  contentClassName?: string
   onClose: () => void
 }
 
 const DialogOverlay = styled('div', {
   position: 'fixed',
-  inset: 0,
-  display: 'grid',
-  placeContent: 'center'
+  inset: 0
 })
 
-const DialogClickOutsideArea = styled('div', {
-  position: 'fixed',
-  inset: 0,
-  opacity: 0.5,
-  background: 'lightgray'
-})
-
-const DialogBox = styled('div', {
-  position: 'relative',
-  width: '50vw',
-  maxWidth: '450px',
-  height: '40vh',
-  maxHeight: '600px',
-  border: '1px solid',
-  backgroundColor: 'white'
-})
-
-const DialogCloseButton = styled('button', {
-  position: 'absolute',
-  top: '10px',
-  right: '10px'
+const DialogContent = styled('div', {
+  position: 'relative'
 })
 
 function Dialog(props: DialogProps) {
@@ -91,26 +70,22 @@ function Dialog(props: DialogProps) {
 
   return (
     <Portal>
-      <DialogOverlay>
-        <DialogClickOutsideArea onClick={props.onClose} />
-        <DialogBox
-          id=""
-          ref={dialogRef}
-          aria-labelledby="dialog1_label"
-          aria-modal="true"
-          role="dialog"
-        >
-          {props.children}
-          <DialogCloseButton onClick={props.onClose}>
-            <span aria-hidden="true">×</span>
-          </DialogCloseButton>
-        </DialogBox>
-      </DialogOverlay>
+      <DialogOverlay
+        data-x-dialog-overlay=""
+        className={props.overlayClassName}
+        onClick={props.onClose}
+      />
+      <DialogContent
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dialog1_label"
+        ref={dialogRef}
+        className={props.contentClassName}
+      >
+        {props.children}
+      </DialogContent>
     </Portal>
   )
 }
-
-Dialog.Header = DialogHeader
-Dialog.Description = DialogDescription
 
 export default Dialog
