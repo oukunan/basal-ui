@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useCallback } from 'react'
 
 import { styled } from '../../../../stitches.config'
 import Portal from '../../portal/src/Portal'
+import { getFirstLastFocusableElement } from './utils/focusable'
+import keyboardKey from '../../../utils/keyboardKey'
 
 type DialogProps = {
   open: boolean
@@ -20,72 +22,67 @@ const DialogContent = styled('div', {
   position: 'relative'
 })
 
-function Dialog(props: DialogProps) {
-  const dialogRef = useRef<HTMLDivElement>(null)
+const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
+  (props, forwardRef) => {
+    const contentRef = useRef<HTMLDivElement>(null)
 
-  const handleTabKey = (e) => {
-    const focusableModalElements = dialogRef.current?.querySelectorAll(
-      'a[href], button, textarea, input, select'
+    // Trap the focus inside the dialog content and close dialog when ESCAPE key pressed
+    const handleKeydown = useCallback(
+      (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === keyboardKey.ESCAPE) {
+          props.onClose()
+          return
+        }
+
+        if (!contentRef.current) {
+          return
+        }
+
+        const currentFocusElement = document.activeElement
+        const [firstElement, lastElement] = getFirstLastFocusableElement(
+          contentRef.current
+        )
+
+        if (e.key === keyboardKey.TAB) {
+          if (e.shiftKey) {
+            if (currentFocusElement === firstElement) {
+              e.preventDefault()
+              lastElement.focus()
+            }
+          } else {
+            if (currentFocusElement === lastElement) {
+              e.preventDefault()
+              firstElement.focus()
+            }
+          }
+        }
+      },
+      [props]
     )
 
-    if (!focusableModalElements) {
-      return
+    if (!props.open) {
+      return null
     }
 
-    const firstElement = focusableModalElements[0] as any
-
-    const lastElement = focusableModalElements[
-      focusableModalElements.length - 1
-    ] as any
-
-    if (!e.shiftKey && document.activeElement !== firstElement) {
-      firstElement.focus()
-      return e.preventDefault()
-    }
-
-    if (e.shiftKey && document.activeElement !== lastElement) {
-      lastElement.focus()
-      e.preventDefault()
-    }
+    return (
+      <Portal>
+        <DialogOverlay
+          data-x-dialog-overlay=""
+          className={props.overlayClassName}
+          onClick={props.onClose}
+        />
+        <DialogContent
+          role="dialog"
+          aria-modal="true"
+          ref={contentRef}
+          className={props.contentClassName}
+          onKeyDown={handleKeydown}
+        >
+          {props.children}
+        </DialogContent>
+      </Portal>
+    )
   }
-
-  const keyListenersMap = new Map([
-    [27, props.onClose],
-    [9, handleTabKey]
-  ])
-
-  useEffect(() => {
-    function keyListener(e) {
-      const listener = keyListenersMap.get(e.keyCode)
-      return listener && listener(e)
-    }
-    document.addEventListener('keydown', keyListener)
-
-    return () => document.removeEventListener('keydown', keyListener)
-  })
-
-  if (!props.open) {
-    return null
-  }
-
-  return (
-    <Portal>
-      <DialogOverlay
-        data-x-dialog-overlay=""
-        className={props.overlayClassName}
-        onClick={props.onClose}
-      />
-      <DialogContent
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="dialog1_label"
-        ref={dialogRef}
-        className={props.contentClassName}
-      >
-        {props.children}
-      </DialogContent>
-    </Portal>
-  )
-}
+)
 
 export default Dialog

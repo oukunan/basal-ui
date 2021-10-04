@@ -5,7 +5,8 @@ const keyboardKey = {
   END: 'End',
   ENTER: 'Enter',
   SPACE: ' ',
-  ESCAPE: 'Escape'
+  ESCAPE: 'Escape',
+  TAB: 'Tab'
 }
 
 export default keyboardKey
