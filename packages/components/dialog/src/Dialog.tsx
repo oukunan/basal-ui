@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react'
+import React, { useRef, useCallback, useEffect } from 'react'
 
 import { styled } from '../../../../stitches.config'
 import Portal from '../../portal/src/Portal'
@@ -25,6 +25,16 @@ const DialogContent = styled('div', {
 const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
   (props, forwardRef) => {
     const contentRef = useRef<HTMLDivElement>(null)
+
+    // Initial focus in the first element node
+    useEffect(() => {
+      if (!contentRef.current) {
+        return
+      }
+
+      const [firstElement] = getFirstLastFocusableElement(contentRef.current)
+      firstElement.focus()
+    }, [])
 
     // Trap the focus inside the dialog content and close dialog when ESCAPE key pressed
     const handleKeydown = useCallback(
@@ -72,6 +82,7 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
           onClick={props.onClose}
         />
         <DialogContent
+          data-x-dialog-content=""
           role="dialog"
           aria-modal="true"
           ref={contentRef}
