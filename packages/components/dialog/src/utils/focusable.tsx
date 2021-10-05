@@ -7,9 +7,11 @@ function getFocusableChildElement(rootElement: HTMLElement) {
     NodeFilter.SHOW_ELEMENT,
     {
       acceptNode: (node: any) => {
-        return node.tabIndex >= 0
-          ? NodeFilter.FILTER_ACCEPT
-          : NodeFilter.FILTER_SKIP
+        if (node.hidden || node.disabled || node.tabIndex < 0) {
+          return NodeFilter.FILTER_SKIP
+        }
+
+        return NodeFilter.FILTER_ACCEPT
       }
     }
   )
