@@ -11,7 +11,7 @@ export const Default = () => {
   return (
     <Dialog open onClose={() => console.log('onClose')}>
       <Dialog.Overlay />
-      <Dialog.Content css>
+      <Dialog.Content>
         <input disabled />
         <input hidden />
         <input data-testid="input1" />
