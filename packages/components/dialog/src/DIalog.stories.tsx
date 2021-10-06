@@ -7,8 +7,16 @@ export default {
   component: Dialog
 } as Meta
 
-export const Default = () => (
-  <Dialog open onClose={() => console.log('onClose')}>
-    Dialog content
-  </Dialog>
-)
+export const Default = () => {
+  return (
+    <Dialog open onClose={() => console.log('onClose')}>
+      <Dialog.Overlay />
+      <Dialog.Content css>
+        <input disabled />
+        <input hidden />
+        <input data-testid="input1" />
+        <button data-testid="button1">Close</button>
+      </Dialog.Content>
+    </Dialog>
+  )
+}
