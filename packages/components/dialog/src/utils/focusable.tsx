@@ -26,5 +26,9 @@ function getFocusableChildElement(rootElement: HTMLElement) {
 export function getFirstLastFocusableElement(rootElement: HTMLElement) {
   const nodes = getFocusableChildElement(rootElement)
 
+  if (nodes.length === 0) {
+    return []
+  }
+
   return [nodes[0], nodes[nodes.length - 1]]
 }
