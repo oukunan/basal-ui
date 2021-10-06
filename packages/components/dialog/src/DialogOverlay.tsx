@@ -1,27 +1,22 @@
-import Portal from '../../portal/src'
+import React from 'react'
 
-import { styled } from '../../../../stitches.config'
+import Portal from '../../portal/src'
 import useDialogContext from './useDialogContext'
 
-const Wrapper = styled('div', {
-  position: 'fixed',
-  inset: 0
-})
+type DialogOverProps = React.HTMLAttributes<HTMLDivElement>
 
-type DialogOverProps = {
-  className?: string
-}
+export default React.forwardRef<HTMLDivElement, DialogOverProps>(
+  function DialogOverlay(props, forwardedRef) {
+    const context = useDialogContext()
 
-export default function DialogOverlay(props: DialogOverProps) {
-  const context = useDialogContext()
+    if (!context.open) {
+      return null
+    }
 
-  if (!context.open) {
-    return null
+    return (
+      <Portal>
+        <div ref={forwardedRef} data-x-dialog-overlay="" {...props} />
+      </Portal>
+    )
   }
-
-  return (
-    <Portal>
-      <Wrapper className={props.className} data-x-dialog-overlay="" />
-    </Portal>
-  )
-}
+)

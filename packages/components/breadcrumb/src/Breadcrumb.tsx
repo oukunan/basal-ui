@@ -1,14 +1,7 @@
 import React from 'react'
-import { styled } from '../../../../stitches.config'
 
 import BreadcrumbLink, { BreadcrumbLinkType } from './BreadcrumbLink'
 import BreadcrumbSeparator from './BreadcrumbSeparator'
-
-const OrderList = styled('ol', {
-  listStyle: 'none',
-  padding: 0,
-  margin: 0
-})
 
 type BreadcrumbProps = {
   links: BreadcrumbLinkType[]
@@ -27,7 +20,7 @@ export default React.forwardRef<HTMLElement, BreadcrumbProps>(
         ref={forwardedRef}
         className={props.navClassName}
       >
-        <OrderList className={props.listClassName}>
+        <ol className={props.listClassName}>
           {props.links.reduce((acc: React.ReactNode[], link, index) => {
             if (index < props.links.length - 1) {
               acc = acc.concat(
@@ -55,7 +48,7 @@ export default React.forwardRef<HTMLElement, BreadcrumbProps>(
 
             return acc
           }, [])}
-        </OrderList>
+        </ol>
       </nav>
     )
   }
