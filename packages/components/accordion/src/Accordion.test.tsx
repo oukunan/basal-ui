@@ -1,7 +1,11 @@
 import { render, cleanup, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { axe, toHaveNoViolations } from 'jest-axe'
 
 import Accordion from './Accordion'
 import keyboardKey from '../../../utils/keyboardKey'
+
+expect.extend(toHaveNoViolations)
 
 afterEach(cleanup)
 
@@ -34,6 +38,13 @@ const BaseComponent = ({
   </Accordion>
 )
 
+it('should have no break accessibility violation', async () => {
+  const { container } = render(<BaseComponent type="single" />)
+  const results = await axe(container)
+
+  expect(results).toHaveNoViolations()
+})
+
 describe('single type', () => {
   it('should not render the accordion content', () => {
     const { getByText } = render(<BaseComponent type="single" />)
@@ -64,9 +75,9 @@ describe('single type', () => {
     const header1 = getByText('Header 1')
     const content1 = getByText('Content 1')
 
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).toBeVisible()
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).not.toBeVisible()
   })
 
@@ -78,9 +89,9 @@ describe('single type', () => {
     const header1 = getByText('Header 1')
     const content1 = getByText('Content 1')
 
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).toBeVisible()
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).toBeVisible()
   })
 })
@@ -118,14 +129,14 @@ describe('multiple type', () => {
     const header2 = getByText('Header 2')
     const content2 = getByText('Content 2')
 
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).toBeVisible()
-    fireEvent.click(header2)
+    userEvent.click(header2)
     expect(content2).toBeVisible()
 
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).not.toBeVisible()
-    fireEvent.click(header2)
+    userEvent.click(header2)
     expect(content2).not.toBeVisible()
   })
 
@@ -137,9 +148,9 @@ describe('multiple type', () => {
     const header1 = getByText('Header 1')
     const content1 = getByText('Content 1')
 
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).toBeVisible()
-    fireEvent.click(header1)
+    userEvent.click(header1)
     expect(content1).toBeVisible()
   })
 })

@@ -1,7 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import { axe, toHaveNoViolations } from 'jest-axe'
 
 import Breadcrumb from './Breadcrumb'
+
+expect.extend(toHaveNoViolations)
 
 const baseProps: React.ComponentProps<typeof Breadcrumb> = {
   links: [
@@ -10,6 +13,13 @@ const baseProps: React.ComponentProps<typeof Breadcrumb> = {
     { label: 'Label 3', href: '/label3' }
   ]
 }
+
+it('should have no break accessibility violations', async () => {
+  const { container } = render(<Breadcrumb {...baseProps} />)
+  const results = await axe(container)
+
+  expect(results).toHaveNoViolations()
+})
 
 it('should renders all links successfully', () => {
   const { container } = render(<Breadcrumb {...baseProps} />)
