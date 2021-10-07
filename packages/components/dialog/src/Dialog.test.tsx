@@ -2,25 +2,24 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import { axe, toHaveNoViolations } from 'jest-axe'
-
 import Dialog from './Dialog'
-
-expect.extend(toHaveNoViolations)
 
 const baseProps: React.ComponentProps<typeof Dialog> = {
   open: true,
   onClose: () => null,
   children: (
-    <Dialog.Content>
-      <input disabled />
-      <input data-testid="input1" />
-      <input hidden />
-      <div tabIndex={0} data-testid="div1">
-        Some div
-      </div>
-      <button data-testid="button1">Close</button>
-    </Dialog.Content>
+    <>
+      <Dialog.Overlay />
+      <Dialog.Content>
+        <input disabled />
+        <input data-testid="input1" />
+        <input hidden />
+        <div tabIndex={0} data-testid="div1">
+          Some div
+        </div>
+        <button data-testid="button1">Close</button>
+      </Dialog.Content>
+    </>
   )
 }
 
@@ -57,11 +56,4 @@ describe('Tab focusable element', () => {
       expect(getByTestId('button1')).toHaveFocus()
     })
   })
-})
-
-it.skip('should have no break accessibility violation', async () => {
-  const { baseElement } = render(<Dialog {...baseProps} />)
-  const results = await axe(baseElement)
-
-  expect(results).toHaveNoViolations()
 })

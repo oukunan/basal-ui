@@ -5,8 +5,8 @@ import { DialogContext } from './useDialogContext'
 import DialogContent from './DialogContent'
 import DialogOverlay from './DialogOverlay'
 
-type DialogProps = {
-  open: boolean
+export type DialogProps = {
+  open?: boolean
   children: React.ReactNode
   onClose: () => void
 }

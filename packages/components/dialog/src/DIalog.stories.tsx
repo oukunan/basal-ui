@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 
 import Dialog from './Dialog'
@@ -8,15 +9,19 @@ export default {
 } as Meta
 
 export const Default = () => {
+  const [open, setOpen] = useState(false)
   return (
-    <Dialog open onClose={() => console.log('onClose')}>
-      <Dialog.Overlay />
-      <Dialog.Content>
-        <input disabled />
-        <input hidden />
-        <input data-testid="input1" />
-        <button data-testid="button1">Close</button>
-      </Dialog.Content>
-    </Dialog>
+    <>
+      <button onClick={() => setOpen(true)}>Open Dialog</button>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <Dialog.Overlay />
+        <Dialog.Content>
+          <input disabled />
+          <input hidden />
+          <input />
+          <button>Close</button>
+        </Dialog.Content>
+      </Dialog>
+    </>
   )
 }

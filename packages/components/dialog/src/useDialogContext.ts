@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 
 type DialogContextType = {
-  open: boolean
+  open?: boolean
   onClose: () => void
 }
 
