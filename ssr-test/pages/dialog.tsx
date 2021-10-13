@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Dialog from '@x-ui/dialog'
+import Dialog from '@basal-ui/dialog'
 
 export default function DialogPage() {
   const [open, setOpen] = useState(false)
@@ -7,8 +7,8 @@ export default function DialogPage() {
     <div>
       <button onClick={() => setOpen(true)}>Open the dialog</button>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Dialog.Header>Dialog Header</Dialog.Header>
-        <Dialog.Description>Dialog Description</Dialog.Description>
+        <Dialog.Overlay />
+        <Dialog.Content>Dialog Content</Dialog.Content>
       </Dialog>
     </div>
   )

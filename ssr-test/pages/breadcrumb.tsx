@@ -1,4 +1,4 @@
-import Breadcrumb from '@x-ui/breadcrumb'
+import Breadcrumb from '@basal-ui/breadcrumb'
 
 export default function BreadcrumbPage() {
   return (

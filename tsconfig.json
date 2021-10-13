@@ -20,10 +20,10 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@x-ui/accordion": ["packages/components/accordion/src"],
-      "@x-ui/breadcrumb": ["packages/components/breadcrumb/src"],
-      "@x-ui/portal": ["packages/components/portal/src"],
-      "@x-ui/dialog": ["packages/components/dialog/src"]
+      "@basal-ui/accordion": ["packages/components/accordion/src"],
+      "@basal-ui/breadcrumb": ["packages/components/breadcrumb/src"],
+      "@basal-ui/portal": ["packages/components/portal/src"],
+      "@basal-ui/dialog": ["packages/components/dialog/src"]
     }
   },
   "include": ["packages"],

@@ -1,4 +1,4 @@
-import { Accordion } from '@x-ui/accordion'
+import { Accordion } from '@basal-ui/accordion'
 
 export default function AccordionPage() {
   return (
