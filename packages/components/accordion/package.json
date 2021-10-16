@@ -1,6 +1,8 @@
 {
   "name": "@basal-ui/accordion",
   "version": "0.0.0",
+  "main": "dist/basal-ui-accordion.cjs.js",
+  "module": "dist/basal-ui-accordion.esm.js",
   "license": "MIT",
   "peerDependencies": {
     "react": "^17.0.2",
