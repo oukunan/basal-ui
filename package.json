@@ -14,6 +14,7 @@
   "dependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
     "@manypkg/cli": "^0.18.0",
     "@preconstruct/cli": "^2.1.5",
@@ -56,8 +57,10 @@
     "test": "lerna run test",
     "diff": "lerna diff",
     "fix": "manypkg fix && preconstruct fix",
-    "new-version": "lerna version --conventional-commits --yes",
+    "pc:init": "preconstruct init",
+    "pc:build": "preconstruct build",
     "postinstall": "preconstruct dev",
+    "new-version": "lerna version --conventional-commits --yes",
     "format:check": "prettier --check .",
     "format:write": "prettier --write ."
   },
