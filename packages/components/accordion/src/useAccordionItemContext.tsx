@@ -1,11 +1,10 @@
 import React, { createContext, useContext, useMemo } from 'react'
+import { useGenerateId } from '@basal-ui/id'
 
 import useAccordionContext from './useAccordionContext'
-import { ItemID } from './types'
-import useGenerateId from '../../../utils/hooks/useGenerateId'
 
 type AccordionItemContextType = {
-  itemId: ItemID
+  itemId: string
   headerId: string
   contentId: string
   isExpanded: boolean
@@ -17,7 +16,7 @@ const AccordionItemContext = createContext<AccordionItemContextType | null>(
 )
 
 export function AccordionItemProvider(props: {
-  itemId: ItemID
+  itemId: string
   children: React.ReactNode
 }) {
   const accordionContext = useAccordionContext()

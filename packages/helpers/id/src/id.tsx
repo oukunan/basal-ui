@@ -19,7 +19,7 @@ export function IdProvider(props) {
   return <IdContext.Provider value={context} {...props} />
 }
 
-export default function useGenerateId(): string {
+export function useGenerateId(): string {
   const context = useContext(IdContext)
 
   return useMemo(() => `id-${++context.current}`, [])

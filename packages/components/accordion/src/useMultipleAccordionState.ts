@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { AccordionMultipleProps } from './AccordionMultiple'
-import { ItemID } from './types'
 
 type UseMultipleAccordionStateProps = Pick<
   AccordionMultipleProps,
@@ -12,7 +11,7 @@ export default function useMultipleAccordionState(
   props: UseMultipleAccordionStateProps
 ) {
   const isControlled = useRef(!!props.value)
-  const [uncontrolledValue, setUncontrolledValue] = useState<ItemID[]>(() => {
+  const [uncontrolledValue, setUncontrolledValue] = useState<string[]>(() => {
     if (!isControlled.current) {
       return props.preExpand || []
     }
@@ -27,7 +26,7 @@ export default function useMultipleAccordionState(
     : setUncontrolledValue
 
   const onToggle = useCallback(
-    (newValue: ItemID) => {
+    (newValue: string) => {
       if (!updateAccordionValue) {
         return
       }

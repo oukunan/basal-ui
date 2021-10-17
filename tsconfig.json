@@ -1,31 +1,19 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "outDir": "lib",
+    "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "declaration": true,
-    "declarationDir": "lib",
-    "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
+    "alwaysStrict": true,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
+    "importHelpers": true,
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "noImplicitAny": false,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@basal-ui/accordion": ["packages/components/accordion/src"],
-      "@basal-ui/breadcrumb": ["packages/components/breadcrumb/src"],
-      "@basal-ui/portal": ["packages/components/portal/src"],
-      "@basal-ui/dialog": ["packages/components/dialog/src"]
-    }
+    "sourceMap": true,
+    "strict": true,
+    "baseUrl": "."
   },
   "include": ["packages"],
-  "exclude": ["node_modules", "lib"]
+  "exclude": ["node_modules"]
 }

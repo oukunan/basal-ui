@@ -4,9 +4,10 @@ import React, {
   useRef,
   useImperativeHandle
 } from 'react'
-import Portal from '../../portal/src'
 
-import keyboardKey from '../../../utils/keyboardKey'
+import Portal from '@basal-ui/portal'
+import keyboardKey from '@basal-ui/keyboard-keycode'
+
 import useDialogContext from './useDialogContext'
 import { getFirstLastFocusableElement } from './utils/focusable'
 

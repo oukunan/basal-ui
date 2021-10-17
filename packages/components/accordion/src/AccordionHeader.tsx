@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import keyboardKey from '@basal-ui/keyboard-keycode'
 
 import useAccordionItemContext from './useAccordionItemContext'
 import {
@@ -7,8 +8,6 @@ import {
   focusNextSibling,
   focusPreviousSibling
 } from './utils/focus'
-
-import keyboardKey from '../../../utils/keyboardKey'
 
 type AccordionHeaderProps = {
   children: React.ReactNode

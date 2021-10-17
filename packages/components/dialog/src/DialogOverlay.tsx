@@ -1,6 +1,6 @@
 import React from 'react'
+import Portal from '@basal-ui/portal'
 
-import Portal from '../../portal/src'
 import useDialogContext from './useDialogContext'
 
 type DialogOverProps = React.HTMLAttributes<HTMLDivElement>

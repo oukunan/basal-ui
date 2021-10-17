@@ -3,12 +3,11 @@ import React, { useMemo } from 'react'
 import { AccordionContext } from './useAccordionContext'
 import useSingleAccordionState from './useSingleAccordionState'
 import { AccordionCommonProps } from './Accordion'
-import { ItemID } from './types'
 
 type AccordionSingleInternalProps = AccordionCommonProps & {
-  value?: ItemID
-  preExpand?: ItemID
-  onToggle?: (value: ItemID) => void
+  value?: string
+  preExpand?: string
+  onToggle?: (value: string) => void
 }
 
 export type AccordionSingleProps = AccordionSingleInternalProps & {

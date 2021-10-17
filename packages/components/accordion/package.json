@@ -1,8 +1,9 @@
 {
   "name": "@basal-ui/accordion",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/basal-ui-accordion.cjs.js",
   "module": "dist/basal-ui-accordion.esm.js",
+  "types": "dist/basal-ui-accordion.cjs.d.ts",
   "license": "MIT",
   "peerDependencies": {
     "react": "^17.0.2",
@@ -10,6 +11,11 @@
   },
   "scripts": {
     "test": "echo testing accordion with version: $npm_package_version"
+  },
+  "dependencies": {
+    "@basal-ui/id": "0.0.0",
+    "@basal-ui/keyboard-keycode": "0.0.0",
+    "@basal-ui/portal": "0.0.0"
   },
   "devDependencies": {
     "react": "^17.0.2",

@@ -1,16 +1,11 @@
 {
-  "private": true,
   "name": "basal-ui",
+  "private": true,
   "version": "1.0.0",
   "license": "MIT",
   "workspaces": [
     "packages/*/*"
   ],
-  "peerDependencies": {
-    "next": "^11.1.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
   "dependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
@@ -44,23 +39,19 @@
     "jest": "^27.2.1",
     "jest-axe": "^5.0.1",
     "lerna": "^4.0.0",
-    "next": "^11.1.2",
-    "postcss": "^8.3.6",
     "prettier": "^2.4.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "start": "start-storybook -p 6006",
+    "dev": "preconstruct dev && start-storybook -p 6006",
     "test": "lerna run test",
     "diff": "lerna diff",
-    "fix": "manypkg fix && preconstruct fix",
-    "pc:init": "preconstruct init",
-    "pc:build": "preconstruct build",
-    "postinstall": "preconstruct dev",
     "new-version": "lerna version --conventional-commits --yes",
+    "fix": "manypkg fix && preconstruct fix",
+    "init": "preconstruct init",
+    "build": "preconstruct build",
+    "postinstall": "manypkg check && preconstruct dev",
     "format:check": "prettier --check .",
     "format:write": "prettier --write ."
   },

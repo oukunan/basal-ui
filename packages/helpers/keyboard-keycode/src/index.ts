@@ -1,4 +1,4 @@
-const keyboardKey = {
+export default {
   DOWN: 'ArrowDown',
   UP: 'ArrowUp',
   HOME: 'Home',
@@ -8,5 +8,3 @@ const keyboardKey = {
   ESCAPE: 'Escape',
   TAB: 'Tab'
 }
-
-export default keyboardKey

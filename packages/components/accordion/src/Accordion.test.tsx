@@ -1,9 +1,9 @@
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { axe, toHaveNoViolations } from 'jest-axe'
+import keyboardKey from '@basal-ui/keyboard-keycode'
 
 import Accordion from './Accordion'
-import keyboardKey from '../../../utils/keyboardKey'
 
 expect.extend(toHaveNoViolations)
 
