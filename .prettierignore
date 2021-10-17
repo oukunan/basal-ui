@@ -1,3 +1,7 @@
 node_modules
 lib
 .storybook
+coverage
+packages/components/*/dist
+packages/helpers/*/dist
+.next

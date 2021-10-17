@@ -1,21 +1,21 @@
 {
-    "name": "@basal-ui/breadcrumb",
-    "version": "0.0.0",
-    "main": "dist/basal-ui-breadcrumb.cjs.js",
-    "module": "dist/basal-ui-breadcrumb.esm.js",
-    "types": "dist/basal-ui-breadcrumb.cjs.d.ts",
-    "license": "MIT",
-    "peerDependencies": {
-        "next": "^11.1.2",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
-    },
-    "scripts": {
-        "test": "echo testing breadcrumb with version: $npm_package_version"
-    },
-    "devDependencies": {
-        "next": "^11.1.2",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
-    }
+  "name": "@basal-ui/breadcrumb",
+  "version": "0.0.0",
+  "main": "dist/basal-ui-breadcrumb.cjs.js",
+  "module": "dist/basal-ui-breadcrumb.esm.js",
+  "types": "dist/basal-ui-breadcrumb.cjs.d.ts",
+  "license": "MIT",
+  "peerDependencies": {
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "scripts": {
+    "test": "echo testing breadcrumb with version: $npm_package_version"
+  },
+  "devDependencies": {
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
 }
