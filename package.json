@@ -51,7 +51,7 @@
     "fix": "manypkg fix && preconstruct fix",
     "init": "preconstruct init",
     "build": "preconstruct build",
-    "postinstall": "manypkg check && preconstruct dev",
+    "postinstall": "preconstruct dev",
     "format:check": "prettier --check .",
     "format:write": "prettier --write ."
   },
