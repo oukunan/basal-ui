@@ -6,6 +6,10 @@
   "workspaces": [
     "packages/*/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futurouz/basal-ui.git"
+  },
   "dependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
