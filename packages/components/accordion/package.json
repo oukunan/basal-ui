@@ -1,6 +1,6 @@
 {
   "name": "@basal-ui/accordion",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.0",
   "main": "dist/basal-ui-accordion.cjs.js",
   "module": "dist/basal-ui-accordion.esm.js",
   "types": "dist/basal-ui-accordion.cjs.d.ts",
@@ -18,9 +18,9 @@
     "test": "echo testing accordion with version: $npm_package_version"
   },
   "dependencies": {
-    "@basal-ui/id": "0.0.0",
-    "@basal-ui/keyboard-keycode": "0.0.0",
-    "@basal-ui/portal": "0.0.0"
+    "@basal-ui/id": "0.0.1-alpha.0",
+    "@basal-ui/keyboard-keycode": "0.0.1-alpha.0",
+    "@basal-ui/portal": "0.0.1-alpha.0"
   },
   "devDependencies": {
     "react": "^17.0.2",

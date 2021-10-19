@@ -1,6 +1,6 @@
 {
   "name": "@basal-ui/breadcrumb",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "main": "dist/basal-ui-breadcrumb.cjs.js",
   "module": "dist/basal-ui-breadcrumb.esm.js",
   "types": "dist/basal-ui-breadcrumb.cjs.d.ts",
