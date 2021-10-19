@@ -5,6 +5,14 @@
   "module": "dist/basal-ui-breadcrumb.esm.js",
   "types": "dist/basal-ui-breadcrumb.cjs.d.ts",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futurouz/basal-ui.git",
+    "directory": "packages/components/breadcrumb"
+  },
   "peerDependencies": {
     "next": "^11.1.2",
     "react": "^17.0.2",

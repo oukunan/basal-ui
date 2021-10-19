@@ -5,6 +5,14 @@
   "module": "dist/basal-ui-id.esm.js",
   "types": "dist/basal-ui-id.cjs.d.ts",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futurouz/basal-ui.git",
+    "directory": "packages/helpers/id"
+  },
   "peerDependencies": {
     "react": "^17.0.2"
   },

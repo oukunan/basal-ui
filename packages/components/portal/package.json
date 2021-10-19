@@ -5,6 +5,14 @@
   "module": "dist/basal-ui-portal.esm.js",
   "types": "dist/basal-ui-portal.cjs.d.ts",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futurouz/basal-ui.git",
+    "directory": "packages/components/portal"
+  },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

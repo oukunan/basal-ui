@@ -5,6 +5,9 @@
   "module": "dist/basal-ui-accordion.esm.js",
   "types": "dist/basal-ui-accordion.cjs.d.ts",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/futurouz/basal-ui.git",
