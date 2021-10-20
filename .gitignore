@@ -21,4 +21,5 @@ sketch
 lib
 coverage
 .npmrc
+packages/**/**/dist
 # End of https://www.toptal.com/developers/gitignore/api/react
