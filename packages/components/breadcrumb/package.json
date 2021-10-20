@@ -1,6 +1,6 @@
 {
   "name": "@basal-ui/breadcrumb",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "Breadcrumb component with accessible of Basal UI",
   "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "main": "dist/basal-ui-breadcrumb.cjs.js",
