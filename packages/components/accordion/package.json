@@ -1,6 +1,6 @@
 {
   "name": "@basal-ui/accordion",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "Accordion component with accessible of Basal UI",
   "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "main": "dist/basal-ui-accordion.cjs.js",
@@ -20,8 +20,8 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@basal-ui/id": "^0.0.1-alpha.2",
-    "@basal-ui/keyboard-keycode": "^0.0.1-alpha.2"
+    "@basal-ui/id": "^0.0.1-alpha.3",
+    "@basal-ui/keyboard-keycode": "^0.0.1-alpha.3"
   },
   "devDependencies": {
     "react": "^17.0.2",
