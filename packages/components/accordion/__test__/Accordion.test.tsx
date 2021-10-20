@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import keyboardKey from '@basal-ui/keyboard-keycode'
 
-import Accordion from './Accordion'
+import Accordion from '../src/Accordion'
 
 expect.extend(toHaveNoViolations)
 

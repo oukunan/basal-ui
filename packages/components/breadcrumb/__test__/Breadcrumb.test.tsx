@@ -1,8 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { axe, toHaveNoViolations } from 'jest-axe'
-
-import Breadcrumb from './Breadcrumb'
+import Breadcrumb from '@basal-ui/breadcrumb'
 
 expect.extend(toHaveNoViolations)
 
