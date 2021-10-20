@@ -9,6 +9,7 @@
     "emitDecoratorMetadata": false,
     "experimentalDecorators": false,
     "importHelpers": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "sourceMap": true,
     "strict": true,
