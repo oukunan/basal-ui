@@ -1,7 +1,8 @@
 module.exports = {
   presets: [
     '@babel/preset-typescript',
-    '@babel/preset-react',
+    // Reference: https://stackoverflow.com/questions/32070303/uncaught-referenceerror-react-is-not-defined
+    ['@babel/preset-react', { runtime: 'automatic' }],
     [
       '@babel/preset-env',
       {
