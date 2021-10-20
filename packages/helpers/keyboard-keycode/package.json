@@ -1,16 +1,18 @@
 {
   "name": "@basal-ui/keyboard-keycode",
   "version": "0.0.1-alpha.1",
+  "description": "Keyboard keycode helper of Basal UI",
+  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com",
   "main": "dist/basal-ui-keyboard-keycode.cjs.js",
   "module": "dist/basal-ui-keyboard-keycode.esm.js",
   "types": "dist/basal-ui-keyboard-keycode.cjs.d.ts",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/futurouz"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/futurouz/basal-ui.git",
+    "url": "git+https://github.com/futurouz/basal-ui.git",
     "directory": "packages/helpers/keyboard-keycode"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

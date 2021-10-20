@@ -1,17 +1,19 @@
 {
   "name": "@basal-ui/portal",
   "version": "0.0.1-alpha.1",
+  "description": "Portal component of Basal UI",
+  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com",
   "main": "dist/basal-ui-portal.cjs.js",
   "module": "dist/basal-ui-portal.esm.js",
   "types": "dist/basal-ui-portal.cjs.d.ts",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/futurouz"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/futurouz/basal-ui.git",
+    "url": "git+https://github.com/futurouz/basal-ui.git",
     "directory": "packages/components/portal"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "peerDependencies": {
     "react": "^17.0.2",

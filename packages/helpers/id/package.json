@@ -1,17 +1,19 @@
 {
   "name": "@basal-ui/id",
   "version": "0.0.1-alpha.1",
+  "description": "ID helper of Basal UI",
+  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com",
   "main": "dist/basal-ui-id.cjs.js",
   "module": "dist/basal-ui-id.esm.js",
   "types": "dist/basal-ui-id.cjs.d.ts",
   "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/futurouz"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/futurouz/basal-ui.git",
+    "url": "git+https://github.com/futurouz/basal-ui.git",
     "directory": "packages/helpers/id"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "peerDependencies": {
     "react": "^17.0.2"
