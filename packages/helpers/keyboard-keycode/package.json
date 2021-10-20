@@ -2,7 +2,7 @@
   "name": "@basal-ui/keyboard-keycode",
   "version": "0.0.1-alpha.2",
   "description": "Keyboard keycode helper of Basal UI",
-  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com",
+  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "main": "dist/basal-ui-keyboard-keycode.cjs.js",
   "module": "dist/basal-ui-keyboard-keycode.esm.js",
   "types": "dist/basal-ui-keyboard-keycode.cjs.d.ts",

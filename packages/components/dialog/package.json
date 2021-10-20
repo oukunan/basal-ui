@@ -2,7 +2,7 @@
   "name": "@basal-ui/dialog",
   "version": "0.0.1-alpha.2",
   "description": "Dialog component with accessible of Basal UI",
-  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com",
+  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "main": "dist/basal-ui-dialog.cjs.js",
   "module": "dist/basal-ui-dialog.esm.js",
   "types": "dist/basal-ui-dialog.cjs.d.ts",

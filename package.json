@@ -2,7 +2,7 @@
   "name": "basal-ui",
   "description": "The accessible for React application",
   "private": true,
-  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com",
+  "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "license": "MIT",
   "workspaces": [
     "packages/*/*"
@@ -54,7 +54,7 @@
   "scripts": {
     "dev": "preconstruct dev && start-storybook -p 6006",
     "test": "jest",
-    "release": "lerna publish --no-push --pre-dist-tag next",
+    "release": "preconstruct build && lerna publish --pre-dist-tag next",
     "fix": "manypkg fix && preconstruct fix",
     "init": "preconstruct init",
     "build": "preconstruct build",
