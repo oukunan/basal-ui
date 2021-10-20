@@ -21,7 +21,7 @@ it('should have no break accessibility violations', async () => {
   expect(results).toHaveNoViolations()
 })
 
-it('should renders all links successfully', () => {
+it.skip('should renders all links successfully', () => {
   const { container } = render(<Breadcrumb {...baseProps} />)
   expect(container).toMatchInlineSnapshot(`
 <div>

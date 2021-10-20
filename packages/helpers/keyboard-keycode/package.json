@@ -12,8 +12,5 @@
     "type": "git",
     "url": "https://github.com/futurouz/basal-ui.git",
     "directory": "packages/helpers/keyboard-keycode"
-  },
-  "scripts": {
-    "test": "echo testing keyboard-keycode with version: $npm_package_version"
   }
 }

@@ -16,9 +16,6 @@
   "peerDependencies": {
     "react": "^17.0.2"
   },
-  "scripts": {
-    "test": "echo testing id with version: $npm_package_version"
-  },
   "devDependencies": {
     "react": "^17.0.2"
   }
