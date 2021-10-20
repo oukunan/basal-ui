@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react/types-6-0'
 
-import Portal from './Portal'
+import Portal from '../src/Portal'
 
 export default {
   title: 'Components/Portal',

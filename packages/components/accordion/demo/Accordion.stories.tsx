@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react/types-6-0'
 import { useState } from 'react'
 
-import Accordion from './Accordion'
+import Accordion from '../src/Accordion'
 
 export default {
   title: 'Components/Accordion',
