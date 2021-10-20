@@ -52,7 +52,7 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "dev": "preconstruct dev && start-storybook -p 6006",
+    "dev": "start-storybook -p 6006",
     "test": "jest",
     "release": "preconstruct build && lerna publish --pre-dist-tag next",
     "fix": "manypkg fix && preconstruct fix",
