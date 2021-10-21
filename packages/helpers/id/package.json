@@ -20,5 +20,9 @@
   },
   "devDependencies": {
     "react": "^17.0.2"
-  }
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ]
 }

@@ -14,5 +14,9 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ]
 }
