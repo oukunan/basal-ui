@@ -16,14 +16,15 @@
     "access": "public"
   },
   "peerDependencies": {
-    "next": "^11.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "next": "^11.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "next": "^11.1.2"
   },
   "files": [
     "README.md",
