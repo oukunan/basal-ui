@@ -1,55 +1,33 @@
 import React from 'react'
 
-import BreadcrumbLink, { BreadcrumbLinkType } from './BreadcrumbLink'
-import BreadcrumbSeparator from './BreadcrumbSeparator'
+import { BreadcrumbProvider } from './useBreadcrumbContext'
+import BreadcrumbLinkWrapper from './BreadcrumbLinkWrapper'
+import BreadcrumbLink from './BreadcrumbLink'
 
 type BreadcrumbProps = {
-  links: BreadcrumbLinkType[]
+  className?: string
   separator?: React.ReactNode
-  separatorGap?: string | number
-  navClassName?: string
-  listClassName?: string
-  linkClassName?: string
+  children: React.ReactNode
 }
 
-export default React.forwardRef<HTMLElement, BreadcrumbProps>(
-  function Breadcrumb(props, forwardedRef) {
-    return (
-      <nav
-        aria-label="Breadcrumb"
-        ref={forwardedRef}
-        className={props.navClassName}
-      >
-        <ol className={props.listClassName}>
-          {props.links.reduce((acc: React.ReactNode[], link, index) => {
-            if (index < props.links.length - 1) {
-              acc = acc.concat(
-                <BreadcrumbLink
-                  key={`item-${index}`}
-                  className={props.linkClassName}
-                  link={link}
-                />,
-                <BreadcrumbSeparator
-                  key={`separator-${index}`}
-                  separator={props.separator}
-                  separatorGap={props.separatorGap}
-                />
-              )
-            } else {
-              acc = acc.concat(
-                <BreadcrumbLink
-                  className={props.linkClassName}
-                  key={`item-${index}`}
-                  link={link}
-                  lastLink
-                />
-              )
-            }
+type BreadcrumbCompoundedComponentType = React.ForwardRefExoticComponent<
+  BreadcrumbProps & React.RefAttributes<HTMLElement>
+> & {
+  LinkWrapper: typeof BreadcrumbLinkWrapper
+  Link: typeof BreadcrumbLink
+}
 
-            return acc
-          }, [])}
-        </ol>
+const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
+  (props, forwardedRef) => (
+    <BreadcrumbProvider separator={props.separator || '>'}>
+      <nav ref={forwardedRef} aria-label="Breadcrumb">
+        {props.children}
       </nav>
-    )
-  }
-)
+    </BreadcrumbProvider>
+  )
+) as BreadcrumbCompoundedComponentType
+
+Breadcrumb.LinkWrapper = BreadcrumbLinkWrapper
+Breadcrumb.Link = BreadcrumbLink
+
+export default Breadcrumb
