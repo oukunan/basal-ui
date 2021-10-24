@@ -22,7 +22,12 @@ export default React.forwardRef<HTMLOListElement, BreadcrumbLinkWrapperProps>(
           if (index < linkItems.length - 1) {
             acc = acc.concat(
               <li key={`link-${index}`}>{currentLink}</li>,
-              <li key={`separator-${index}`}>{context.separator}</li>
+              <li
+                key={`separator-${index}`}
+                data-breadcrumb-component="separator"
+              >
+                {context.separator}
+              </li>
             )
           } else {
             acc = acc.concat(
