@@ -15,7 +15,12 @@ export default React.forwardRef<HTMLDivElement, DialogOverProps>(
 
     return (
       <Portal>
-        <div ref={forwardedRef} data-x-dialog-overlay="" {...props} />
+        <div
+          ref={forwardedRef}
+          data-basal-dialog-overlay=""
+          data-state={context.open ? 'open' : 'closed'}
+          {...props}
+        />
       </Portal>
     )
   }

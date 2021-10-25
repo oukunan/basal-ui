@@ -98,6 +98,7 @@ export default React.forwardRef<HTMLDivElement, DialogContentProps>(
           hidden={!context.open}
           ref={callbackRef}
           onKeyDown={handleKeydown}
+          data-state={context.open ? 'open' : 'closed'}
           data-basal-dialog-content=""
         >
           {props.children}

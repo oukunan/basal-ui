@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Meta } from '@storybook/react/types-6-0'
 
-import Dialog from '../src/Dialog'
+import { Dialog } from '../src/'
 
 export default {
   title: 'Components/Dialog',
