@@ -1,61 +1,56 @@
 /**
  * @internal only
  */
-function getRootAccordionNode(elem: HTMLButtonElement) {
-  return elem.parentElement?.parentElement
-}
+function getAllItemSiblings(elem: HTMLButtonElement): HTMLDivElement[] {
+  const root = elem.closest('[data-basal-accordion=""]')
 
-/**
- * @internal only
- */
-function getAllHeaderSiblings(elem: HTMLButtonElement) {
-  const root = elem.parentElement?.parentElement
   return root
-    ? Array.from(
-        root.querySelectorAll('[data-accordion-component="AccordionHeader"]')
-      )
+    ? Array.from(root.querySelectorAll('[data-basal-accordion-item=""]'))
     : []
 }
 
 export function focusLastSibling(elem: HTMLButtonElement) {
-  const siblings = getAllHeaderSiblings(elem)
+  const siblings = getAllItemSiblings(elem)
+  const lastSibling = siblings[siblings.length - 1].querySelector(
+    '[data-basal-accordion-button]'
+  ) as HTMLDivElement
 
-  const lastSibling = siblings[siblings.length - 1]
-    .firstChild as HTMLButtonElement
-
-  lastSibling.focus()
+  lastSibling?.focus()
 }
 
 export function focusFirstSibling(elem: HTMLButtonElement) {
-  const firstChild = getRootAccordionNode(elem)?.firstChild
-    ?.firstChild as HTMLButtonElement
+  const siblings = getAllItemSiblings(elem)
+  const firstSibling = siblings[0].querySelector(
+    '[data-basal-accordion-button]'
+  ) as HTMLDivElement
 
-  firstChild.focus()
+  firstSibling.focus()
 }
 
 export function focusNextSibling(elem: HTMLButtonElement) {
-  const siblings = getAllHeaderSiblings(elem)
-
+  const siblings = getAllItemSiblings(elem)
   const currentElemIndex = siblings.indexOf(
-    elem.parentElement as HTMLButtonElement
+    elem.closest('[data-basal-accordion-item=""]') as HTMLDivElement
   )
 
+  // Focus first item when focus ring is on the last item.
   if (currentElemIndex === siblings.length - 1) {
     focusFirstSibling(elem)
     return
   }
 
-  const nextSibling = siblings[currentElemIndex + 1]
-    .firstChild as HTMLButtonElement
+  const nextSibling = siblings[currentElemIndex + 1].querySelector(
+    '[data-basal-accordion-button]'
+  ) as HTMLDivElement
 
   nextSibling.focus()
 }
 
 export function focusPreviousSibling(elem: HTMLButtonElement) {
-  const siblings = getAllHeaderSiblings(elem)
+  const siblings = getAllItemSiblings(elem)
 
   const currentElemIndex = siblings.indexOf(
-    elem.parentElement as HTMLButtonElement
+    elem.closest('[data-basal-accordion-item=""]') as HTMLDivElement
   )
 
   if (currentElemIndex === 0) {
@@ -63,8 +58,9 @@ export function focusPreviousSibling(elem: HTMLButtonElement) {
     return
   }
 
-  const previousSibling = siblings[currentElemIndex - 1]
-    .firstChild as HTMLButtonElement
+  const previousSibling = siblings[currentElemIndex - 1].querySelector(
+    '[data-basal-accordion-button]'
+  ) as HTMLDivElement
 
   previousSibling.focus()
 }

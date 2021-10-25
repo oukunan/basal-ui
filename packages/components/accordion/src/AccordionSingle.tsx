@@ -36,7 +36,7 @@ export default React.forwardRef<HTMLDivElement, AccordionSingleProps>(
 
     return (
       <AccordionContext.Provider value={context}>
-        <div ref={forwardRef} {...restProps} />
+        <div ref={forwardRef} {...restProps} data-basal-accordion="" />
       </AccordionContext.Provider>
     )
   }

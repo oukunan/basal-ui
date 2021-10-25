@@ -7,7 +7,7 @@ type AccordionItemContextType = {
   itemId: string
   headerId: string
   contentId: string
-  isExpanded: boolean
+  open: boolean
   onToggle?: () => void
 }
 
@@ -27,7 +27,7 @@ export function AccordionItemProvider(props: {
       itemId: props.itemId,
       headerId: `header-${id}`,
       contentId: `content-${id}`,
-      isExpanded: !!accordionContext.value?.includes(props.itemId),
+      open: !!accordionContext.value?.includes(props.itemId),
       onToggle: () =>
         accordionContext.onToggle && accordionContext.onToggle(props.itemId)
     }),

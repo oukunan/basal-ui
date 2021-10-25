@@ -11,15 +11,21 @@ export default {
 const AccordionChildren = () => (
   <>
     <Accordion.Item value="one">
-      <Accordion.Header>This is header 1</Accordion.Header>
+      <Accordion.Header>
+        <Accordion.Button>This is header 1</Accordion.Button>
+      </Accordion.Header>
       <Accordion.Content>Content 1</Accordion.Content>
     </Accordion.Item>
     <Accordion.Item value="two">
-      <Accordion.Header>This is header 2</Accordion.Header>
+      <Accordion.Header>
+        <Accordion.Button>This is header 2</Accordion.Button>
+      </Accordion.Header>
       <Accordion.Content>Content 2</Accordion.Content>
     </Accordion.Item>
     <Accordion.Item value="three">
-      <Accordion.Header>This is header 3</Accordion.Header>
+      <Accordion.Header>
+        <Accordion.Button>This is header 3</Accordion.Button>
+      </Accordion.Header>
       <Accordion.Content>Content 3</Accordion.Content>
     </Accordion.Item>
   </>

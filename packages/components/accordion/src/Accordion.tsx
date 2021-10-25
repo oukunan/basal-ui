@@ -2,12 +2,13 @@ import React, { useCallback } from 'react'
 import { IdProvider } from '@basal-ui/id'
 
 import AccordionHeader from './AccordionHeader'
+import AccordionButton from './AccordionButton'
 import AccordionItem from './AccordionItem'
 import AccordionContent from './AccordionContent'
 import AccordionSingle, { AccordionSingleProps } from './AccordionSingle'
 import AccordionMultiple, { AccordionMultipleProps } from './AccordionMultiple'
 
-export type AccordionCommonProps = React.HTMLAttributes<HTMLDivElement> & {
+export type AccordionCommonProps = {
   allowZeroCollapse?: boolean
   className?: string
   children: React.ReactNode
@@ -19,6 +20,7 @@ type AccordionCompoundedComponentType = React.ForwardRefExoticComponent<
 > & {
   Item: typeof AccordionItem
   Header: typeof AccordionHeader
+  Button: typeof AccordionButton
   Content: typeof AccordionContent
 }
 
@@ -56,6 +58,7 @@ Accordion.displayName = 'Accordion'
 
 Accordion.Item = AccordionItem
 Accordion.Header = AccordionHeader
+Accordion.Button = AccordionButton
 Accordion.Content = AccordionContent
 
 export default Accordion

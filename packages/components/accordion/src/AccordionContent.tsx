@@ -2,13 +2,13 @@ import React from 'react'
 import useAccordionItemContext from './useAccordionItemContext'
 
 type AccordionContentProps = {
-  children: React.ReactNode
   className?: string
+  children: React.ReactNode
 }
 
 export default React.forwardRef<HTMLDivElement, AccordionContentProps>(
   function AccordionContent(props, forwardedRef) {
-    const { contentId, headerId, isExpanded } = useAccordionItemContext()
+    const { contentId, headerId, open } = useAccordionItemContext()
     return (
       <div
         id={contentId}
@@ -16,7 +16,8 @@ export default React.forwardRef<HTMLDivElement, AccordionContentProps>(
         className={props.className}
         role="region"
         aria-labelledby={headerId}
-        hidden={!isExpanded}
+        hidden={!open}
+        data-basal-accordion-content=""
       >
         {props.children}
       </div>

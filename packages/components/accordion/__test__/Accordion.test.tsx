@@ -24,15 +24,21 @@ const BaseComponent = ({
     onToggle={onToggle}
   >
     <Accordion.Item value="one">
-      <Accordion.Header>Header 1</Accordion.Header>
+      <Accordion.Header>
+        <Accordion.Button>Header 1</Accordion.Button>
+      </Accordion.Header>
       <Accordion.Content>Content 1</Accordion.Content>
     </Accordion.Item>
     <Accordion.Item value="two">
-      <Accordion.Header>Header 2</Accordion.Header>
+      <Accordion.Header>
+        <Accordion.Button>Header 2</Accordion.Button>
+      </Accordion.Header>
       <Accordion.Content>Content 2</Accordion.Content>
     </Accordion.Item>
     <Accordion.Item value="three">
-      <Accordion.Header>Header 3</Accordion.Header>
+      <Accordion.Header>
+        <Accordion.Button>Header 3</Accordion.Button>
+      </Accordion.Header>
       <Accordion.Content>Content 3</Accordion.Content>
     </Accordion.Item>
   </Accordion>
