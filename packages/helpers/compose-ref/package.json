@@ -1,0 +1,22 @@
+{
+    "name": "@basal-ui/compose-ref",
+    "version": "0.0.1",
+    "description": "Compose React ref helper of Basal UI",
+    "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
+    "main": "dist/basal-ui-compose-ref.cjs.js",
+    "module": "dist/basal-ui-compose-ref.esm.js",
+    "types": "dist/basal-ui-compose-ref.cjs.d.ts",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/futurouz/basal-ui.git",
+        "directory": "packages/helpers/compose-ref"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "README.md",
+        "dist"
+    ]
+}
