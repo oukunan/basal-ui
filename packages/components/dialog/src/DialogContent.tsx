@@ -7,7 +7,10 @@ import { useComposeRef } from '@basal-ui/compose-ref'
 import useDialogContext from './useDialogContext'
 import { getFirstLastFocusableElement } from './utils/focusable'
 
-type DialogContentProps = React.HTMLAttributes<HTMLDivElement>
+type DialogContentProps = {
+  className?: string
+  children: React.ReactNode
+}
 
 export default React.forwardRef<HTMLDivElement, DialogContentProps>(
   function DialogContent(props, forwardedRef) {
@@ -89,13 +92,16 @@ export default React.forwardRef<HTMLDivElement, DialogContentProps>(
     return (
       <Portal>
         <div
-          {...props}
-          data-x-dialog-content=""
+          className={props.className}
           role="dialog"
           aria-modal="true"
+          hidden={!context.open}
           ref={callbackRef}
           onKeyDown={handleKeydown}
-        />
+          data-basal-dialog-content=""
+        >
+          {props.children}
+        </div>
       </Portal>
     )
   }
