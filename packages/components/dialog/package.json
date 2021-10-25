@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "@basal-ui/keyboard-keycode": "^0.0.1-alpha.5",
-    "@basal-ui/portal": "^0.0.1-alpha.5"
+    "@basal-ui/portal": "^0.0.1-alpha.5",
+    "@basal-ui/compose-ref": "0.0.1"
   },
   "devDependencies": {
     "react": "^17.0.2",

@@ -1,12 +1,8 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useImperativeHandle
-} from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 
 import Portal from '@basal-ui/portal'
 import keyboardKey from '@basal-ui/keyboard-keycode'
+import { useComposeRef } from '@basal-ui/compose-ref'
 
 import useDialogContext from './useDialogContext'
 import { getFirstLastFocusableElement } from './utils/focusable'
@@ -17,8 +13,7 @@ export default React.forwardRef<HTMLDivElement, DialogContentProps>(
   function DialogContent(props, forwardedRef) {
     const context = useDialogContext()
     const contentRef = useRef<HTMLDivElement>(null)
-
-    useImperativeHandle(forwardedRef, () => contentRef.current!, [])
+    const callbackRef = useComposeRef(contentRef, forwardedRef)
 
     // Initial focus in the first element node
     useEffect(() => {
@@ -98,7 +93,7 @@ export default React.forwardRef<HTMLDivElement, DialogContentProps>(
           data-x-dialog-content=""
           role="dialog"
           aria-modal="true"
-          ref={contentRef}
+          ref={callbackRef}
           onKeyDown={handleKeydown}
         />
       </Portal>
