@@ -1,6 +1,6 @@
 {
   "name": "basal-ui",
-  "description": "The accessible for React application",
+  "description": "The accessible components for React application",
   "private": true,
   "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "license": "MIT",
