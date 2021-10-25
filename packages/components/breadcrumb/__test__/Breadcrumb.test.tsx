@@ -29,8 +29,11 @@ it('should renders all links successfully', () => {
     <div>
       <nav
         aria-label="Breadcrumb"
+        data-basal-breadcrumb=""
       >
-        <ol>
+        <ol
+          data-basal-breadcrumb-link-wrapper=""
+        >
           <li>
             <a
               href="/label1"
@@ -39,7 +42,8 @@ it('should renders all links successfully', () => {
             </a>
           </li>
           <li
-            data-breadcrumb-component="separator"
+            arial-hidden="true"
+            data-basal-breadcrumb-separator=""
           >
             &gt;
           </li>
@@ -51,7 +55,8 @@ it('should renders all links successfully', () => {
             </a>
           </li>
           <li
-            data-breadcrumb-component="separator"
+            arial-hidden="true"
+            data-basal-breadcrumb-separator=""
           >
             &gt;
           </li>
@@ -73,7 +78,7 @@ it('should renders all links successfully', () => {
 it('should renders `aria-current="page" with the last link`', () => {
   const { container } = render(<BaseComponent />)
 
-  expect(container.querySelector('[aria-current="page"]')?.textContent).toEqual(
+  expect(container.querySelector('[aria-current="page"]')?.textContent).toBe(
     'Label 3'
   )
 })
@@ -82,7 +87,6 @@ it('should not renders a default separator', () => {
   const { container } = render(<BaseComponent separator="➡️" />)
 
   expect(
-    container.querySelector('[data-breadcrumb-component="separator"]')
-      ?.textContent
+    container.querySelector('[data-basal-breadcrumb-separator=""]')?.textContent
   ).toBe('➡️')
 })

@@ -24,7 +24,8 @@ export default React.forwardRef<HTMLOListElement, BreadcrumbLinkWrapperProps>(
               <li key={`link-${index}`}>{currentLink}</li>,
               <li
                 key={`separator-${index}`}
-                data-breadcrumb-component="separator"
+                arial-hidden="true"
+                data-basal-breadcrumb-separator=""
               >
                 {context.separator}
               </li>
@@ -43,7 +44,11 @@ export default React.forwardRef<HTMLOListElement, BreadcrumbLinkWrapperProps>(
     )
 
     return (
-      <ol ref={forwardedRef} className={props.className}>
+      <ol
+        ref={forwardedRef}
+        className={props.className}
+        data-basal-breadcrumb-link-wrapper=""
+      >
         {content}
       </ol>
     )

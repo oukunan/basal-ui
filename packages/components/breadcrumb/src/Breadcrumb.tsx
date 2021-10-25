@@ -20,7 +20,7 @@ type BreadcrumbCompoundedComponentType = React.ForwardRefExoticComponent<
 const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
   (props, forwardedRef) => (
     <BreadcrumbProvider separator={props.separator || '>'}>
-      <nav ref={forwardedRef} aria-label="Breadcrumb">
+      <nav ref={forwardedRef} aria-label="Breadcrumb" data-basal-breadcrumb="">
         {props.children}
       </nav>
     </BreadcrumbProvider>
