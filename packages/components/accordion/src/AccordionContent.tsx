@@ -16,7 +16,7 @@ export default React.forwardRef<HTMLDivElement, AccordionContentProps>(
         className={props.className}
         role="region"
         aria-labelledby={context.headerId}
-        hidden={!open}
+        hidden={!context.open}
         data-state={context.open ? 'open' : 'closed'}
         data-basal-accordion-content=""
       >

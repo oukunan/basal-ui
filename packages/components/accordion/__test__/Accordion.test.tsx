@@ -9,20 +9,8 @@ expect.extend(toHaveNoViolations)
 
 afterEach(cleanup)
 
-const BaseComponent = ({
-  type,
-  preExpand,
-  allowZeroCollapse,
-  value,
-  onToggle
-}: any) => (
-  <Accordion
-    type={type}
-    preExpand={preExpand}
-    allowZeroCollapse={allowZeroCollapse}
-    value={value}
-    onToggle={onToggle}
-  >
+const BaseComponent = (props) => (
+  <Accordion {...props}>
     <Accordion.Item value="one">
       <Accordion.Header>
         <Accordion.Button>Header 1</Accordion.Button>
@@ -44,6 +32,16 @@ const BaseComponent = ({
   </Accordion>
 )
 
+/**
+ * @internal
+ */
+function getByTextList(
+  texts: string[],
+  getByText: (text: string) => HTMLElement
+) {
+  return texts.map(getByText)
+}
+
 it('should have no break accessibility violation', async () => {
   const { container } = render(<BaseComponent type="single" />)
   const results = await axe(container)
@@ -55,22 +53,38 @@ describe('single type', () => {
   it('should not render the accordion content', () => {
     const { getByText } = render(<BaseComponent type="single" />)
 
+    const [content1, content2, content3] = getByTextList(
+      ['Content 1', 'Content 2', 'Content 3'],
+      getByText
+    )
+
     expect(getByText('Header 1')).toBeVisible()
     expect(getByText('Header 2')).toBeVisible()
     expect(getByText('Header 3')).toBeVisible()
-    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
-    expect(getByText('Content 2').getAttribute('data-state')).toBe('closed')
-    expect(getByText('Content 3').getAttribute('data-state')).toBe('closed')
+
+    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
+    expect(content2).not.toBeVisible()
+    expect(content2.getAttribute('data-state')).toBe('closed')
+    expect(content3).not.toBeVisible()
+    expect(content3.getAttribute('data-state')).toBe('closed')
   })
 
   it('should render the `second` item with `preExpand` props', () => {
     const { getByText } = render(
       <BaseComponent type="single" preExpand="two" />
     )
+    const [content1, content2, content3] = getByTextList(
+      ['Content 1', 'Content 2', 'Content 3'],
+      getByText
+    )
 
-    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
-    expect(getByText('Content 2').getAttribute('data-state')).toBe('open')
-    expect(getByText('Content 3').getAttribute('data-state')).toBe('closed')
+    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
+    expect(content2).toBeVisible()
+    expect(content2.getAttribute('data-state')).toBe('open')
+    expect(content1).not.toBeVisible()
+    expect(content3.getAttribute('data-state')).toBe('closed')
   })
 
   it('should able to collapse all the items when `allowZeroCollapse=true`', () => {
@@ -82,8 +96,10 @@ describe('single type', () => {
     const content1 = getByText('Content 1')
 
     userEvent.click(header1)
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header1)
+    expect(content1).not.toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('closed')
   })
 
@@ -96,8 +112,10 @@ describe('single type', () => {
     const content1 = getByText('Content 1')
 
     userEvent.click(header1)
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header1)
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
   })
 })
@@ -106,12 +124,20 @@ describe('multiple type', () => {
   it('should not render the accordion content', () => {
     const { getByText } = render(<BaseComponent type="multiple" />)
 
+    const [content1, content2, content3] = getByTextList(
+      ['Content 1', 'Content 2', 'Content 3'],
+      getByText
+    )
+
     expect(getByText('Header 1')).toBeVisible()
     expect(getByText('Header 2')).toBeVisible()
     expect(getByText('Header 3')).toBeVisible()
-    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
-    expect(getByText('Content 2').getAttribute('data-state')).toBe('closed')
-    expect(getByText('Content 3').getAttribute('data-state')).toBe('closed')
+    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
+    expect(content2).not.toBeVisible()
+    expect(content2.getAttribute('data-state')).toBe('closed')
+    expect(content3).not.toBeVisible()
+    expect(content3.getAttribute('data-state')).toBe('closed')
   })
 
   it('should render the `second` item with `preExpand` props', () => {
@@ -119,9 +145,17 @@ describe('multiple type', () => {
       <BaseComponent type="multiple" preExpand={['two', 'three']} />
     )
 
-    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
-    expect(getByText('Content 2').getAttribute('data-state')).toBe('open')
-    expect(getByText('Content 2').getAttribute('data-state')).toBe('open')
+    const [content1, content2, content3] = getByTextList(
+      ['Content 1', 'Content 2', 'Content 3'],
+      getByText
+    )
+
+    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
+    expect(content2).toBeVisible()
+    expect(content2.getAttribute('data-state')).toBe('open')
+    expect(content3).toBeVisible()
+    expect(content3.getAttribute('data-state')).toBe('open')
   })
 
   it('should able to collapse all the items when `allowZeroCollapse=true`', () => {
@@ -129,20 +163,22 @@ describe('multiple type', () => {
       <BaseComponent type="multiple" allowZeroCollapse />
     )
 
-    const header1 = getByText('Header 1')
-    const content1 = getByText('Content 1')
-
-    const header2 = getByText('Header 2')
-    const content2 = getByText('Content 2')
+    const [header1, header2, content1, content2] = getByTextList(
+      ['Header 1', 'Header 2', 'Content 1', 'Content 2'],
+      getByText
+    )
 
     userEvent.click(header1)
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header2)
+    expect(content2).toBeVisible()
     expect(content2.getAttribute('data-state')).toBe('open')
-
     userEvent.click(header1)
+    expect(content1).not.toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('closed')
     userEvent.click(header2)
+    expect(content2).not.toBeVisible()
     expect(content2.getAttribute('data-state')).toBe('closed')
   })
 
@@ -155,18 +191,21 @@ describe('multiple type', () => {
     const content1 = getByText('Content 1')
 
     userEvent.click(header1)
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header1)
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
   })
 })
 
-describe('Accessibility', () => {
+describe('focus management', () => {
   it('should have all headers focusable', async () => {
     const { getByText } = render(<BaseComponent type="single" />)
 
     const header1 = getByText('Header 1')
     const header2 = getByText('Header 2')
+
     header1.focus()
     expect(header1).toHaveFocus()
     header2.focus()
@@ -186,9 +225,11 @@ describe('Accessibility', () => {
 
     fireEvent.keyDown(header1, { key: keyboardKey.SPACE, keyCode: 32 })
     expect(header1).toHaveFocus()
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
 
     fireEvent.keyDown(header1, { key: keyboardKey.SPACE, keyCode: 32 })
+    expect(content1).not.toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('closed')
     expect(header1).toHaveFocus()
   })
@@ -206,9 +247,11 @@ describe('Accessibility', () => {
 
     fireEvent.keyDown(header1, { key: keyboardKey.ENTER, keyCode: 13 })
     expect(header1).toHaveFocus()
+    expect(content1).toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('open')
 
     fireEvent.keyDown(header1, { key: keyboardKey.ENTER, keyCode: 13 })
+    expect(content1).not.toBeVisible()
     expect(content1.getAttribute('data-state')).toBe('closed')
     expect(header1).toHaveFocus()
   })
