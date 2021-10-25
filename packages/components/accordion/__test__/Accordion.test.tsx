@@ -58,9 +58,9 @@ describe('single type', () => {
     expect(getByText('Header 1')).toBeVisible()
     expect(getByText('Header 2')).toBeVisible()
     expect(getByText('Header 3')).toBeVisible()
-    expect(getByText('Content 1')).not.toBeVisible()
-    expect(getByText('Content 2')).not.toBeVisible()
-    expect(getByText('Content 3')).not.toBeVisible()
+    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
+    expect(getByText('Content 2').getAttribute('data-state')).toBe('closed')
+    expect(getByText('Content 3').getAttribute('data-state')).toBe('closed')
   })
 
   it('should render the `second` item with `preExpand` props', () => {
@@ -68,9 +68,9 @@ describe('single type', () => {
       <BaseComponent type="single" preExpand="two" />
     )
 
-    expect(getByText('Content 1')).not.toBeVisible()
-    expect(getByText('Content 2')).toBeVisible()
-    expect(getByText('Content 3')).not.toBeVisible()
+    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
+    expect(getByText('Content 2').getAttribute('data-state')).toBe('open')
+    expect(getByText('Content 3').getAttribute('data-state')).toBe('closed')
   })
 
   it('should able to collapse all the items when `allowZeroCollapse=true`', () => {
@@ -82,9 +82,9 @@ describe('single type', () => {
     const content1 = getByText('Content 1')
 
     userEvent.click(header1)
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header1)
-    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
   })
 
   it('should NOT able to collapse all the items when `allowZeroCollapse=false`', () => {
@@ -96,9 +96,9 @@ describe('single type', () => {
     const content1 = getByText('Content 1')
 
     userEvent.click(header1)
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header1)
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
   })
 })
 
@@ -109,9 +109,9 @@ describe('multiple type', () => {
     expect(getByText('Header 1')).toBeVisible()
     expect(getByText('Header 2')).toBeVisible()
     expect(getByText('Header 3')).toBeVisible()
-    expect(getByText('Content 1')).not.toBeVisible()
-    expect(getByText('Content 2')).not.toBeVisible()
-    expect(getByText('Content 3')).not.toBeVisible()
+    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
+    expect(getByText('Content 2').getAttribute('data-state')).toBe('closed')
+    expect(getByText('Content 3').getAttribute('data-state')).toBe('closed')
   })
 
   it('should render the `second` item with `preExpand` props', () => {
@@ -119,9 +119,9 @@ describe('multiple type', () => {
       <BaseComponent type="multiple" preExpand={['two', 'three']} />
     )
 
-    expect(getByText('Content 1')).not.toBeVisible()
-    expect(getByText('Content 2')).toBeVisible()
-    expect(getByText('Content 3')).toBeVisible()
+    expect(getByText('Content 1').getAttribute('data-state')).toBe('closed')
+    expect(getByText('Content 2').getAttribute('data-state')).toBe('open')
+    expect(getByText('Content 2').getAttribute('data-state')).toBe('open')
   })
 
   it('should able to collapse all the items when `allowZeroCollapse=true`', () => {
@@ -136,14 +136,14 @@ describe('multiple type', () => {
     const content2 = getByText('Content 2')
 
     userEvent.click(header1)
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header2)
-    expect(content2).toBeVisible()
+    expect(content2.getAttribute('data-state')).toBe('open')
 
     userEvent.click(header1)
-    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
     userEvent.click(header2)
-    expect(content2).not.toBeVisible()
+    expect(content2.getAttribute('data-state')).toBe('closed')
   })
 
   it('should NOT able to collapse all the items when `allowZeroCollapse=false`', () => {
@@ -155,9 +155,9 @@ describe('multiple type', () => {
     const content1 = getByText('Content 1')
 
     userEvent.click(header1)
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
     userEvent.click(header1)
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
   })
 })
 
@@ -186,10 +186,10 @@ describe('Accessibility', () => {
 
     fireEvent.keyDown(header1, { key: keyboardKey.SPACE, keyCode: 32 })
     expect(header1).toHaveFocus()
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
 
     fireEvent.keyDown(header1, { key: keyboardKey.SPACE, keyCode: 32 })
-    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
     expect(header1).toHaveFocus()
   })
 
@@ -206,9 +206,10 @@ describe('Accessibility', () => {
 
     fireEvent.keyDown(header1, { key: keyboardKey.ENTER, keyCode: 13 })
     expect(header1).toHaveFocus()
-    expect(content1).toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('open')
+
     fireEvent.keyDown(header1, { key: keyboardKey.ENTER, keyCode: 13 })
-    expect(content1).not.toBeVisible()
+    expect(content1.getAttribute('data-state')).toBe('closed')
     expect(header1).toHaveFocus()
   })
 

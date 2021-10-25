@@ -8,15 +8,16 @@ type AccordionContentProps = {
 
 export default React.forwardRef<HTMLDivElement, AccordionContentProps>(
   function AccordionContent(props, forwardedRef) {
-    const { contentId, headerId, open } = useAccordionItemContext()
+    const context = useAccordionItemContext()
     return (
       <div
-        id={contentId}
+        id={context.contentId}
         ref={forwardedRef}
         className={props.className}
         role="region"
-        aria-labelledby={headerId}
+        aria-labelledby={context.headerId}
         hidden={!open}
+        data-state={context.open ? 'open' : 'closed'}
         data-basal-accordion-content=""
       >
         {props.children}
