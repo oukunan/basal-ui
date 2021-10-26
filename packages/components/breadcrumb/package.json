@@ -27,6 +27,7 @@
     "next": "^11.1.2"
   },
   "files": [
+    "style.css",
     "README.md",
     "dist"
   ]

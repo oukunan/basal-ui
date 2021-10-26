@@ -21,7 +21,9 @@ export default React.forwardRef<HTMLOListElement, BreadcrumbLinkWrapperProps>(
         linkItems.reduce((acc: React.ReactNode[], currentLink, index) => {
           if (index < linkItems.length - 1) {
             acc = acc.concat(
-              <li key={`link-${index}`}>{currentLink}</li>,
+              <li key={`link-${index}`} data-basal-breadcrumb-link="">
+                {currentLink}
+              </li>,
               <li
                 key={`separator-${index}`}
                 arial-hidden="true"
@@ -32,7 +34,11 @@ export default React.forwardRef<HTMLOListElement, BreadcrumbLinkWrapperProps>(
             )
           } else {
             acc = acc.concat(
-              <li key={`link-${index}`} aria-current="page">
+              <li
+                key={`link-${index}`}
+                aria-current="page"
+                data-basal-breadcrumb-link=""
+              >
                 {currentLink}
               </li>
             )
