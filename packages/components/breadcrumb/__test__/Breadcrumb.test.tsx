@@ -34,7 +34,9 @@ it('should renders all links successfully', () => {
         <ol
           data-basal-breadcrumb-link-wrapper=""
         >
-          <li>
+          <li
+            data-basal-breadcrumb-link=""
+          >
             <a
               href="/label1"
             >
@@ -47,7 +49,9 @@ it('should renders all links successfully', () => {
           >
             &gt;
           </li>
-          <li>
+          <li
+            data-basal-breadcrumb-link=""
+          >
             <a
               href="/label2"
             >
@@ -62,6 +66,7 @@ it('should renders all links successfully', () => {
           </li>
           <li
             aria-current="page"
+            data-basal-breadcrumb-link=""
           >
             <a
               href="/label3"
