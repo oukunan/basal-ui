@@ -1,8 +1,7 @@
 import React from 'react'
 import useAccordionItemContext from './useAccordionItemContext'
 
-type AccordionHeaderProps = {
-  className?: string
+type AccordionHeaderProps = React.HTMLAttributes<HTMLHeadingElement> & {
   children: React.ReactNode
 }
 
@@ -11,13 +10,11 @@ export default React.forwardRef<HTMLDivElement, AccordionHeaderProps>(
     const context = useAccordionItemContext()
     return (
       <h3
+        {...props}
         ref={forwardedRef}
-        className={props.className}
         data-state={context.open ? 'open' : 'closed'}
         data-basal-accordion-header=""
-      >
-        {props.children}
-      </h3>
+      />
     )
   }
 )

@@ -9,8 +9,7 @@ import {
   focusPreviousSibling
 } from './utils/focus'
 
-type AccordionButtonProps = {
-  className?: string
+type AccordionButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode
 }
 
@@ -50,17 +49,16 @@ export default React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
     )
     return (
       <button
-        ref={forwardedRef}
         id={headerId}
+        ref={forwardedRef}
         aria-controls={contentId}
         aria-expanded={open}
         aria-disabled={open}
         onClick={onToggle}
         onKeyDown={navigateFocus}
+        {...props}
         data-basal-accordion-button=""
-      >
-        {props.children}
-      </button>
+      />
     )
   }
 )
