@@ -54,9 +54,9 @@
   "scripts": {
     "dev": "start-storybook -p 6006",
     "test": "jest",
-    "release": "preconstruct build && lerna publish --pre-dist-tag next",
+    "publish": "preconstruct build && lerna publish",
     "fix": "manypkg fix && preconstruct fix",
-    "init": "preconstruct init",
+    "pc:init": "preconstruct init",
     "build": "preconstruct build",
     "postinstall": "preconstruct dev",
     "format:check": "prettier --check .",
