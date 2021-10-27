@@ -1,6 +1,6 @@
 {
   "name": "@basal-ui/id",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.2-alpha.0",
   "description": "ID helper of Basal UI",
   "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "main": "dist/basal-ui-id.cjs.js",

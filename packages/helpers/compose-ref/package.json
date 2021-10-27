@@ -1,6 +1,6 @@
 {
     "name": "@basal-ui/compose-ref",
-    "version": "0.0.1",
+    "version": "0.0.2-alpha.0",
     "description": "Compose React ref helper of Basal UI",
     "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
     "main": "dist/basal-ui-compose-ref.cjs.js",

@@ -1,6 +1,6 @@
 {
   "name": "@basal-ui/dialog",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.2-alpha.0",
   "description": "Dialog component with accessible of Basal UI",
   "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
   "main": "dist/basal-ui-dialog.cjs.js",
@@ -20,9 +20,9 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@basal-ui/compose-ref": "0.0.1",
-    "@basal-ui/keyboard-keycode": "^0.0.1-alpha.5",
-    "@basal-ui/portal": "^0.0.1-alpha.5"
+    "@basal-ui/compose-ref": "^0.0.2-alpha.0",
+    "@basal-ui/keyboard-keycode": "^0.0.2-alpha.0",
+    "@basal-ui/portal": "^0.0.2-alpha.0"
   },
   "devDependencies": {
     "react": "^17.0.2",
