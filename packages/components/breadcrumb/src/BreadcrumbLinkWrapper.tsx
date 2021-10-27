@@ -2,18 +2,18 @@ import React, { useMemo } from 'react'
 
 import useBreadcrumbContext from './useBreadcrumbContext'
 
-type BreadcrumbLinkWrapperProps = {
-  className?: string
+type BreadcrumbLinkWrapperProps = React.HTMLAttributes<HTMLOListElement> & {
   children: React.ReactNode
 }
 
 export default React.forwardRef<HTMLOListElement, BreadcrumbLinkWrapperProps>(
   function BreadcrumbLinkWrapper(props, forwardedRef) {
     const context = useBreadcrumbContext()
+    const { children, ...restProps } = props
 
     const linkItems = useMemo(
-      () => React.Children.toArray(props.children),
-      [props.children]
+      () => React.Children.toArray(children),
+      [children]
     )
 
     const content = useMemo(
@@ -51,8 +51,8 @@ export default React.forwardRef<HTMLOListElement, BreadcrumbLinkWrapperProps>(
 
     return (
       <ol
+        {...restProps}
         ref={forwardedRef}
-        className={props.className}
         data-basal-breadcrumb-link-wrapper=""
       >
         {content}

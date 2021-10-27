@@ -4,8 +4,7 @@ import { BreadcrumbProvider } from './useBreadcrumbContext'
 import BreadcrumbLinkWrapper from './BreadcrumbLinkWrapper'
 import BreadcrumbLink from './BreadcrumbLink'
 
-type BreadcrumbProps = {
-  className?: string
+type BreadcrumbProps = React.HTMLAttributes<HTMLElement> & {
   separator?: React.ReactNode
   children: React.ReactNode
 }
@@ -17,14 +16,22 @@ type BreadcrumbCompoundedComponentType = React.ForwardRefExoticComponent<
   Link: typeof BreadcrumbLink
 }
 
+const DEFAULT_BREADCRUMB_SEPARATOR = '>'
+
 const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
-  (props, forwardedRef) => (
-    <BreadcrumbProvider separator={props.separator || '>'}>
-      <nav ref={forwardedRef} aria-label="Breadcrumb" data-basal-breadcrumb="">
-        {props.children}
-      </nav>
-    </BreadcrumbProvider>
-  )
+  (props, forwardedRef) => {
+    const { separator = DEFAULT_BREADCRUMB_SEPARATOR, ...restProps } = props
+    return (
+      <BreadcrumbProvider separator={separator}>
+        <nav
+          aria-label="Breadcrumb"
+          {...restProps}
+          ref={forwardedRef}
+          data-basal-breadcrumb=""
+        />
+      </BreadcrumbProvider>
+    )
+  }
 ) as BreadcrumbCompoundedComponentType
 
 Breadcrumb.LinkWrapper = BreadcrumbLinkWrapper
