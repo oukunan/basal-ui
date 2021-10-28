@@ -7,7 +7,7 @@
     "access": "public"
   },
   "useWorkspaces": true,
-  "version": "independent",
+  "version": "0.0.2-alpha.0",
   "ignoreChanges": [
     "**/__tests__/**",
     "packages/components/*/*.stories.tsx"
