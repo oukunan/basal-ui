@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef } from 'react'
 import Portal from '@basal-ui/portal'
 import keyboardKey from '@basal-ui/keyboard-keycode'
 import { useComposeRef } from '@basal-ui/compose-ref'
+import { RemoveScroll } from 'react-remove-scroll'
 
 import useDialogContext from './useDialogContext'
 import { getFirstLastFocusableElement } from './utils/focusable'
@@ -91,18 +92,20 @@ export default React.forwardRef<HTMLDivElement, DialogContentProps>(
 
     return (
       <Portal>
-        <div
-          className={props.className}
-          role="dialog"
-          aria-modal="true"
-          hidden={!context.open}
-          ref={callbackRef}
-          onKeyDown={handleKeydown}
-          data-state={context.open ? 'open' : 'closed'}
-          data-basal-dialog-content=""
-        >
-          {props.children}
-        </div>
+        <RemoveScroll>
+          <div
+            className={props.className}
+            role="dialog"
+            aria-modal="true"
+            hidden={!context.open}
+            ref={callbackRef}
+            onKeyDown={handleKeydown}
+            data-state={context.open ? 'open' : 'closed'}
+            data-basal-dialog-content=""
+          >
+            {props.children}
+          </div>
+        </RemoveScroll>
       </Portal>
     )
   }
