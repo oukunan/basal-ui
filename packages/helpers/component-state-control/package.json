@@ -1,6 +1,6 @@
 {
     "name": "@basal-ui/component-state-control",
-    "version": "0.0.0",
+    "version": "0.0.2-alpha.2",
     "description": "component-state-control helper of Basal UI",
     "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
     "main": "dist/basal-ui-component-state-control.cjs.js",

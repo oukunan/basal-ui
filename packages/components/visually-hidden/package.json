@@ -1,6 +1,6 @@
 {
     "name": "@basal-ui/visually-hidden",
-    "version": "0.0.0",
+    "version": "0.0.2-alpha.2",
     "description": "Visually hidden component of Basal UI",
     "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
     "main": "dist/basal-ui-visually-hidden.cjs.js",
