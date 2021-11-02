@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
+import { useComponentStateControl } from '@basal-ui/component-state-control'
 
 import { AccordionContext } from './useAccordionContext'
-import useMultipleAccordionState from './useMultipleAccordionState'
 import { AccordionCommonProps } from './Accordion'
 
 type AccordionMultipleInternalProps = AccordionCommonProps & {
@@ -16,22 +16,45 @@ export type AccordionMultipleProps = AccordionMultipleInternalProps & {
 
 export default React.forwardRef<HTMLDivElement, AccordionMultipleProps>(
   function AccordionMultiple(props, forwardedRef) {
-    const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } =
-      props
-
-    const state = useMultipleAccordionState({
+    const {
+      allowZeroCollapse,
       value,
       preExpand,
-      allowZeroCollapse,
-      onToggle
+      onToggle = () => {},
+      ...restProps
+    } = props
+
+    const [state, setState] = useComponentStateControl({
+      value,
+      onValueChange: onToggle,
+      initialValue: preExpand
     })
 
     const context = useMemo(
       () => ({
-        value: state.value,
-        onToggle: state.onToggle
+        value: state ?? [],
+        onOpen: (value?: string) => {
+          if (!value) {
+            return
+          }
+
+          state
+            ? setState((prevState) => [...prevState, value])
+            : setState([value])
+        },
+        onClose: (value?: string) => {
+          if (!state) {
+            return
+          }
+
+          if (state.length === 1 && !allowZeroCollapse) {
+            return
+          }
+
+          setState((prevState) => prevState.filter((id) => id !== value))
+        }
       }),
-      [state.onToggle, state.value]
+      [allowZeroCollapse, setState, state]
     )
 
     return (

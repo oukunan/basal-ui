@@ -8,7 +8,8 @@ type AccordionItemContextType = {
   headerId: string
   contentId: string
   open: boolean
-  onToggle?: () => void
+  onOpen: (value?: string) => void
+  onClose: (value?: string) => void
 }
 
 const AccordionItemContext = createContext<AccordionItemContextType | null>(
@@ -28,8 +29,8 @@ export function AccordionItemProvider(props: {
       headerId: `header-${id}`,
       contentId: `content-${id}`,
       open: !!accordionContext.value?.includes(props.itemId),
-      onToggle: () =>
-        accordionContext.onToggle && accordionContext.onToggle(props.itemId)
+      onOpen: accordionContext.onOpen,
+      onClose: accordionContext.onClose
     }),
     [accordionContext, id, props.itemId]
   )

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
+import { useComponentStateControl } from '@basal-ui/component-state-control'
 
 import { AccordionContext } from './useAccordionContext'
-import useSingleAccordionState from './useSingleAccordionState'
 import { AccordionCommonProps } from './Accordion'
 
 type AccordionSingleInternalProps = AccordionCommonProps & {
@@ -16,22 +16,33 @@ export type AccordionSingleProps = AccordionSingleInternalProps & {
 
 export default React.forwardRef<HTMLDivElement, AccordionSingleProps>(
   function AccordionSingle(props, forwardRef) {
-    const { allowZeroCollapse, value, preExpand, onToggle, ...restProps } =
-      props
-
-    const state = useSingleAccordionState({
-      value,
+    const {
       allowZeroCollapse,
+      value,
       preExpand,
-      onToggle
+      onToggle = () => {},
+      ...restProps
+    } = props
+
+    const [state, setState] = useComponentStateControl({
+      value,
+      onValueChange: onToggle,
+      initialValue: preExpand
     })
 
     const context = useMemo(
       () => ({
-        value: state.value ? [state.value] : [],
-        onToggle: state.onToggle
+        value: state ? [state] : [],
+        onOpen: (value?: string) => value && setState(value),
+        onClose: () => {
+          if (!allowZeroCollapse) {
+            return
+          }
+
+          setState('')
+        }
       }),
-      [state.onToggle, state.value]
+      [allowZeroCollapse, setState, state]
     )
 
     return (

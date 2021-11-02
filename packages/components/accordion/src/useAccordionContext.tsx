@@ -2,7 +2,8 @@ import { createContext, useContext } from 'react'
 
 type AccordionContextType = {
   value?: string[]
-  onToggle?: (value: string) => void
+  onOpen: (value?: string) => void
+  onClose: (value?: string) => void
 }
 
 export const AccordionContext = createContext<AccordionContextType | null>(null)

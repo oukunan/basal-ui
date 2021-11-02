@@ -15,7 +15,16 @@ type AccordionButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
 
 export default React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
   function AccordionButton(props, forwardedRef) {
-    const { open, onToggle, headerId, contentId } = useAccordionItemContext()
+    const { open, onClose, onOpen, headerId, contentId, itemId } =
+      useAccordionItemContext()
+
+    const handleToggle = useCallback(() => {
+      if (open) {
+        onClose(itemId)
+      } else {
+        onOpen(itemId)
+      }
+    }, [itemId, onClose, onOpen, open])
 
     const navigateFocus = useCallback(
       (e: React.KeyboardEvent<HTMLButtonElement>) => {
@@ -25,7 +34,7 @@ export default React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
           case keyboardKey.SPACE:
           case keyboardKey.ENTER:
             e.preventDefault()
-            onToggle && onToggle()
+            handleToggle()
             break
           case keyboardKey.DOWN:
             e.preventDefault()
@@ -45,8 +54,9 @@ export default React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
           default:
         }
       },
-      [onToggle]
+      [handleToggle]
     )
+
     return (
       <button
         id={headerId}
@@ -54,7 +64,7 @@ export default React.forwardRef<HTMLButtonElement, AccordionButtonProps>(
         aria-controls={contentId}
         aria-expanded={open}
         aria-disabled={open}
-        onClick={onToggle}
+        onClick={handleToggle}
         onKeyDown={navigateFocus}
         {...props}
         data-basal-accordion-button=""
