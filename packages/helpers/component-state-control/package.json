@@ -1,0 +1,28 @@
+{
+    "name": "@basal-ui/component-state-control",
+    "version": "0.0.0",
+    "description": "component-state-control helper of Basal UI",
+    "author": "Kunanan Tassuwan <kunanan.tw@gmail.com>",
+    "main": "dist/basal-ui-component-state-control.cjs.js",
+    "module": "dist/basal-ui-component-state-control.esm.js",
+    "types": "dist/basal-ui-component-state-control.cjs.d.ts",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/futurouz/basal-ui.git",
+        "directory": "packages/helpers/component-state-control"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "peerDependencies": {
+        "react": "^17.0.2"
+    },
+    "devDependencies": {
+        "react": "^17.0.2"
+    },
+    "files": [
+        "README.md",
+        "dist"
+    ]
+}
